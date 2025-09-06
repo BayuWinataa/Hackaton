@@ -1,0 +1,272 @@
+[
+	{
+		"id": 1,
+		"nama": "Headphone Peredam Bising Pro",
+		"harga": 1500000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Headphone canggih dengan teknologi peredam bising aktif, cocok untuk bekerja, belajar, atau traveling. Kualitas suara jernih dengan bass yang dalam.",
+		"tags": ["audio", "gadget", "travel", "fokus", "premium", "musik"]
+	},
+	{
+		"id": 2,
+		"nama": "Paket Biji Kopi Arabika Pilihan",
+		"harga": 250000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "makanan & minuman",
+		"deskripsi": "Satu set berisi 3 varian biji kopi Arabika dari Gayo, Toraja, dan Kintamani. Cocok untuk pecinta kopi sejati atau sebagai hadiah.",
+		"tags": ["kopi", "hadiah", "pagi", "gourmet", "minuman"]
+	},
+	{
+		"id": 3,
+		"nama": "Novel Fiksi Ilmiah 'Gerbang Semesta'",
+		"harga": 120000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "buku",
+		"deskripsi": "Novel best-seller tentang perjalanan antar dimensi yang menegangkan dan penuh teka-teki. Wajib dibaca oleh penggemar fiksi ilmiah.",
+		"tags": ["buku", "fiksi", "petualangan", "hadiah", "membaca"]
+	},
+	{
+		"id": 4,
+		"nama": "Smartwatch Pelacak Kebugaran V5",
+		"harga": 850000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Jam tangan pintar dengan GPS, monitor detak jantung, dan pelacak tidur. Tahan air hingga 50m dan baterai tahan hingga 7 hari. Kompatibel dengan Android dan iOS.",
+		"tags": ["smartwatch", "kesehatan", "olahraga", "gadget", "lari", "fitness"]
+	},
+	{
+		"id": 5,
+		"nama": "Ransel Laptop Anti Air",
+		"harga": 450000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "fashion & aksesoris",
+		"deskripsi": "Ransel modern dengan kompartemen laptop hingga 15 inci, dibuat dari bahan anti air. Desain minimalis cocok untuk kerja atau kuliah.",
+		"tags": ["tas", "ransel", "laptop", "kerja", "kuliah", "travel"]
+	},
+	{
+		"id": 6,
+		"nama": "Keyboard Mekanikal Gaming RGB",
+		"harga": 980000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Keyboard mekanikal dengan switch biru yang responsif dan lampu latar RGB yang bisa diatur. Didesain untuk performa gaming maksimal.",
+		"tags": ["keyboard", "gaming", "komputer", "rgb", "aksesoris pc"]
+	},
+	{
+		"id": 7,
+		"nama": "Set Teh Herbal Relaksasi",
+		"harga": 180000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "makanan & minuman",
+		"deskripsi": "Koleksi teh herbal premium berisi chamomile, peppermint, dan lavender. Membantu menenangkan pikiran dan meningkatkan kualitas tidur.",
+		"tags": ["teh", "herbal", "kesehatan", "relaksasi", "hadiah", "minuman"]
+	},
+	{
+		"id": 8,
+		"nama": "Kamera Mirrorless Alpha Z",
+		"harga": 8500000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Kamera mirrorless entry-level dengan sensor APS-C 24MP. Mampu merekam video 4K dan dilengkapi dengan layar sentuh lipat. Sempurna untuk vlogging dan fotografi.",
+		"tags": ["kamera", "fotografi", "vlogging", "video", "elektronik", "hobi"]
+	},
+	{
+		"id": 9,
+		"nama": "Kursi Kantor Ergonomis FlexiChair",
+		"harga": 2200000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "furnitur & rumah tangga",
+		"deskripsi": "Kursi kerja yang dirancang untuk kenyamanan maksimal dengan dukungan punggung yang bisa disesuaikan, sandaran tangan 4D, dan material jaring yang sejuk.",
+		"tags": ["kursi", "kantor", "ergonomis", "furnitur", "kerja", "kesehatan"]
+	},
+	{
+		"id": 10,
+		"nama": "Drone Quadcopter Mini SkyView",
+		"harga": 1250000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "hobi & mainan",
+		"deskripsi": "Drone lipat yang mudah dibawa dengan kamera 1080p. Cocok untuk pemula yang ingin belajar videografi udara. Waktu terbang hingga 15 menit.",
+		"tags": ["drone", "hobi", "fotografi", "video", "gadget", "mainan"]
+	},
+	{
+		"id": 11,
+		"nama": "Sneakers Urban Explorer X1",
+		"harga": 750000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "fashion & aksesoris",
+		"deskripsi": "Sepatu sneakers kasual dengan desain modern dan sol yang empuk. Nyaman digunakan untuk berjalan seharian di perkotaan.",
+		"tags": ["sepatu", "sneakers", "fashion", "kasual", "pria", "wanita"]
+	},
+	{
+		"id": 12,
+		"nama": "Botol Minum Termos Cerdas HydroSmart",
+		"harga": 350000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "dapur & rumah tangga",
+		"deskripsi": "Botol minum stainless steel yang dapat menjaga suhu minuman panas atau dingin hingga 12 jam. Dilengkapi penutup dengan display suhu LED.",
+		"tags": ["termos", "botol minum", "olahraga", "travel", "kesehatan", "gadget"]
+	},
+	{
+		"id": 13,
+		"nama": "Buku 'Atomic Habits' - James Clear",
+		"harga": 108000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "buku",
+		"deskripsi": "Buku pengembangan diri terlaris di dunia yang mengajarkan cara membangun kebiasaan baik dan menghilangkan kebiasaan buruk melalui perubahan-perubahan kecil.",
+		"tags": ["buku", "pengembangan diri", "non-fiksi", "produktivitas", "kebiasaan"]
+	},
+	{
+		"id": 14,
+		"nama": "Tanaman Hias Sukulen (Set isi 5)",
+		"harga": 150000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "rumah & taman",
+		"deskripsi": "Satu set berisi lima jenis sukulen yang berbeda dalam pot keramik mini. Perawatannya mudah dan cocok untuk menghias meja kerja atau ruangan.",
+		"tags": ["tanaman", "dekorasi", "rumah", "kantor", "hadiah", "hobi"]
+	},
+	{
+		"id": 15,
+		"nama": "Lampu Meja LED dengan Pengisian Nirkabel",
+		"harga": 400000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Lampu meja modern dengan tingkat kecerahan yang dapat disesuaikan dan fitur pengisian nirkabel untuk smartphone. Desain minimalis cocok untuk meja kerja atau belajar.",
+		"tags": ["lampu", "meja", "led", "gadget", "kerja", "belajar"]
+	},
+	{
+		"id": 16,
+		"nama": "Set Alat Tulis Premium Executive",
+		"harga": 300000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "kantor & alat tulis",
+		"deskripsi": "Set alat tulis lengkap dengan pena, pensil, penghapus, dan penggaris dalam kotak kayu elegan. Cocok untuk profesional atau sebagai hadiah.",
+		"tags": ["alat tulis", "pena", "kantor", "hadiah", "profesional", "eksekutif"]
+	},
+	{
+		"id": 17,
+		"nama": "Speaker Bluetooth Portabel SoundWave",
+		"harga": 600000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Speaker Bluetooth dengan suara jernih dan bass yang kuat. Tahan air dan baterai tahan hingga 10 jam, ideal untuk aktivitas outdoor.",
+		"tags": ["speaker", "bluetooth", "musik", "outdoor", "gadget", "audio"]
+	},
+	{
+		"id": 18,
+		"nama": "Set Peralatan Memasak Stainless Steel",
+		"harga": 1200000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "dapur & rumah tangga",
+		"deskripsi": "Set lengkap peralatan memasak dari stainless steel berkualitas tinggi, termasuk panci, wajan, spatula, dan sendok. Tahan lama dan mudah dibersihkan.",
+		"tags": ["dapur", "memasak", "peralatan", "stainless steel", "rumah tangga"]
+	},
+	{
+		"id": 19,
+		"nama": "Tas Selempang Kulit Asli Vintage",
+		"harga": 850000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "fashion & aksesoris",
+		"deskripsi": "Tas selempang dari kulit asli dengan desain vintage yang elegan. Cocok untuk pria dan wanita, memberikan sentuhan klasik pada penampilan sehari-hari.",
+		"tags": ["tas", "selempang", "kulit", "fashion", "vintage", "aksesoris"]
+	},
+	{
+		"id": 20,
+		"nama": "Kamera Aksi 4K Ultra HD",
+		"harga": 2000000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Kamera aksi tahan air dengan resolusi 4K Ultra HD, cocok untuk merekam petualangan outdoor seperti bersepeda, menyelam, atau hiking. Dilengkapi dengan berbagai aksesori.",
+		"tags": ["kamera aksi", "4k", "outdoor", "petualangan", "gadget", "video"]
+	},
+	{
+		"id": 21,
+		"nama": "Set Alat Berkebun untuk Pemula",
+		"harga": 250000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "rumah & taman",
+		"deskripsi": "Set alat berkebun lengkap dengan sekop, garpu, sarung tangan, dan penyiram. Cocok untuk pemula yang ingin memulai hobi berkebun di rumah.",
+		"tags": ["berkebun", "alat", "taman", "hobi", "rumah", "pemula"]
+	},
+	{
+		"id": 22,
+		"nama": "Kacamata Hitam Polarized Trendy",
+		"harga": 300000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "fashion & aksesoris",
+		"deskripsi": "Kacamata hitam dengan lensa polarized yang melindungi mata dari sinar UV. Desain trendy cocok untuk berbagai aktivitas outdoor.",
+		"tags": ["kacamata", "hitam", "polarized", "fashion", "outdoor", "aksesoris"]
+	},
+	{
+		"id": 23,
+		"nama": "Bantal Leher Memory Foam TravelMate",
+		"harga": 200000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "dapur & rumah tangga",
+		"deskripsi": "Bantal leher ergonomis dari memory foam yang memberikan dukungan optimal saat bepergian. Ringan dan mudah dibawa, cocok untuk perjalanan jauh.",
+		"tags": ["bantal leher", "travel", "memory foam", "perjalanan", "nyaman", "gadget"]
+	},
+	{
+		"id": 24,
+		"nama": "Set Perawatan Kulit Alami GlowUp",
+		"harga": 500000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "kecantikan & perawatan diri",
+		"deskripsi": "Set perawatan kulit lengkap dengan pembersih wajah, toner, serum, dan pelembap berbahan alami. Cocok untuk semua jenis kulit.",
+		"tags": ["perawatan kulit", "alami", "kecantikan", "serum", "pelembap", "toner"]
+	},
+	{
+		"id": 25,
+		"nama": "Jam Dinding Minimalis Modern",
+		"harga": 350000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "furnitur & rumah tangga",
+		"deskripsi": "Jam dinding dengan desain minimalis dan modern, cocok untuk menghias ruang tamu atau kantor. Baterai tahan lama dan mudah dipasang.",
+		"tags": ["jam dinding", "minimalis", "modern", "dekorasi", "rumah", "kantor"]
+	},
+	{
+		"id": 26,
+		"nama": "Set Alat Lukis Profesional",
+		"harga": 400000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "hobi & mainan",
+		"deskripsi": "Set lengkap alat lukis untuk seniman, termasuk cat akrilik, kuas berbagai ukuran, palet, dan kanvas. Cocok untuk pemula hingga profesional.",
+		"tags": ["alat lukis", "cat akrilik", "hobi", "seni", "kanvas", "profesional"]
+	},
+	{
+		"id": 27,
+		"nama": "Sepeda Lipat Urban Cruiser",
+		"harga": 3000000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "olahraga & outdoor",
+		"deskripsi": "Sepeda lipat ringan dengan rangka aluminium, cocok untuk berkeliling kota. Mudah dilipat dan dibawa, serta dilengkapi dengan sistem pengereman yang aman.",
+		"tags": ["sepeda", "lipat", "olahraga", "outdoor", "transportasi", "gadget"]
+	},
+	{
+		"id": 28,
+		"nama": "Paket Perlengkapan Yoga Lengkap",
+		"harga": 600000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "kesehatan & kebugaran",
+		"deskripsi": "Paket lengkap perlengkapan yoga termasuk matras anti slip, blok yoga, tali peregangan, dan tas pembawa. Cocok untuk pemula dan praktisi yoga berpengalaman.",
+		"tags": ["yoga", "kebugaran", "kesehatan", "matras", "alat yoga", "hobi"]
+	},
+	{
+		"id": 29,
+		"nama": "Casing Smartphone Anti Gores dan Tahan Banting",
+		"harga": 150000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "elektronik",
+		"deskripsi": "Casing pelindung untuk smartphone dengan desain slim namun tahan banting. Dilengkapi dengan pelindung layar anti gores.",
+		"tags": ["casing", "smartphone", "pelindung", "gadget", "anti gores", "tahan banting"]
+	},
+	{
+		"id": 30,
+		"nama": "Set Alat Musik Ukulele Beginner",
+		"harga": 800000,
+		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"kategori": "hobi & mainan",
+		"deskripsi": "Set alat musik ukulele lengkap dengan ukulele ukuran standar, tuner, strap, dan buku panduan belajar. Cocok untuk pemula yang ingin belajar bermain ukulele.",
+		"tags": ["ukulele", "musik", "alat musik", "hobi", "belajar", "pemula"]
+	}
+]
