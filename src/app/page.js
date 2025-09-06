@@ -4,8 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import products from '@/../products.json';
-import gambar from '@/app/assets/kobo.jpg';
-import { ShoppingCart, MessageSquare, Menu, Sparkles, Filter } from 'lucide-react';
+import fallbackImg from '@/app/assets/kobo.jpg';
+import { MessageSquare, Menu, Sparkles, Filter } from 'lucide-react';
 
 // shadcn/ui components
 import { Button } from '@/components/ui/button';
@@ -16,33 +16,42 @@ import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
+// Cart
+import CartButton from '@/components/cart/CartButton';
+
 export default function HomePage() {
 	const [query, setQuery] = useState('');
 	const [category, setCategory] = useState('semua');
 	const [sortBy, setSortBy] = useState('terkini');
-	const cartCount = 3; // mock
 
 	const categories = useMemo(() => {
-		const set = new Set(products.map((p) => p.kategori).filter(Boolean));
+		const set = new Set((products || []).map((p) => p.kategori).filter(Boolean));
 		return ['semua', ...Array.from(set)];
 	}, []);
 
 	const filtered = useMemo(() => {
-		let list = products.filter((p) => {
-			const matchQuery = query ? p.nama?.toLowerCase().includes(query.toLowerCase()) || p.kategori?.toLowerCase().includes(query.toLowerCase()) : true;
+		const list = (products || []).filter((p) => {
+			const nama = (p.nama || '').toLowerCase();
+			const kat = (p.kategori || '').toLowerCase();
+			const matchQuery = query ? nama.includes(query.toLowerCase()) || kat.includes(query.toLowerCase()) : true;
 			const matchCat = category === 'semua' ? true : p.kategori === category;
 			return matchQuery && matchCat;
 		});
 
-		if (sortBy === 'termurah') list.sort((a, b) => a.harga - b.harga);
-		if (sortBy === 'termahal') list.sort((a, b) => b.harga - a.harga);
-		if (sortBy === 'az') list.sort((a, b) => a.nama.localeCompare(b.nama));
-		if (sortBy === 'za') list.sort((a, b) => b.nama.localeCompare(a.nama));
-
-		return list;
+		const arr = [...list];
+		if (sortBy === 'termurah') arr.sort((a, b) => (a.harga || 0) - (b.harga || 0));
+		if (sortBy === 'termahal') arr.sort((a, b) => (b.harga || 0) - (a.harga || 0));
+		if (sortBy === 'az') arr.sort((a, b) => String(a.nama).localeCompare(String(b.nama)));
+		if (sortBy === 'za') arr.sort((a, b) => String(b.nama).localeCompare(String(a.nama)));
+		return arr;
 	}, [query, category, sortBy]);
 
-	const formatIDR = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
+	const formatIDR = (n) =>
+		new Intl.NumberFormat('id-ID', {
+			style: 'currency',
+			currency: 'IDR',
+			maximumFractionDigits: 0,
+		}).format(Number.isFinite(n) ? n : 0);
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white">
@@ -61,35 +70,6 @@ export default function HomePage() {
 							</Badge>
 						</div>
 
-						{/* Center: Controls (desktop) */}
-						<div className="hidden md:flex items-center gap-3 max-w-xl w-full">
-							<Input placeholder="Cari produk, kategori..." value={query} onChange={(e) => setQuery(e.target.value)} className="w-full" />
-							<Select value={category} onValueChange={setCategory}>
-								<SelectTrigger className="min-w-[140px]">
-									<SelectValue placeholder="Kategori" />
-								</SelectTrigger>
-								<SelectContent>
-									{categories.map((c) => (
-										<SelectItem key={c} value={c}>
-											{c[0].toUpperCase() + c.slice(1)}
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-							<Select value={sortBy} onValueChange={setSortBy}>
-								<SelectTrigger className="min-w-[150px]">
-									<SelectValue placeholder="Urutkan" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value="terkini">Terbaru</SelectItem>
-									<SelectItem value="termurah">Harga: Termurah</SelectItem>
-									<SelectItem value="termahal">Harga: Termahal</SelectItem>
-									<SelectItem value="az">Nama: A–Z</SelectItem>
-									<SelectItem value="za">Nama: Z–A</SelectItem>
-								</SelectContent>
-							</Select>
-						</div>
-
 						{/* Right: Actions */}
 						<div className="flex items-center gap-2">
 							<Button asChild className="hidden sm:inline-flex">
@@ -98,10 +78,8 @@ export default function HomePage() {
 								</Link>
 							</Button>
 
-							<Button variant="outline" className="relative" aria-label="Buka keranjang">
-								<ShoppingCart className="h-5 w-5" />
-								<span className="absolute -top-2 -right-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[10px] font-semibold text-white">{cartCount}</span>
-							</Button>
+							{/* Keranjang terhubung context */}
+							<CartButton />
 
 							{/* Mobile menu */}
 							<Sheet>
@@ -228,16 +206,16 @@ export default function HomePage() {
 					<EmptyState />
 				) : (
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-						{filtered.map((product) => (
+						{filtered.map((product, idx) => (
 							<Card key={product.id} className="group overflow-hidden hover:shadow-xl transition-all">
 								<div className="relative aspect-[4/3] w-full overflow-hidden">
 									<Image
-										src={gambar}
+										src={product.image || fallbackImg}
 										alt={product.nama}
 										fill
 										className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
 										sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-										priority={false}
+										priority={idx < 4}
 									/>
 								</div>
 								<CardHeader className="pb-2">
@@ -251,8 +229,8 @@ export default function HomePage() {
 										</div>
 										<div className="flex items-center gap-2">
 											<Badge variant="outline">Baru</Badge>
-											<Button variant="secondary" size="sm">
-												Detail
+											<Button asChild variant="secondary" size="sm">
+												<Link href={`/products/${product.id}`}>Detail</Link>
 											</Button>
 										</div>
 									</div>
