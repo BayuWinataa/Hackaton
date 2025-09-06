@@ -1,400 +1,292 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
-import { Scale, Sparkles, Send, Loader2, Check, X, ArrowRight, MessageSquare } from 'lucide-react';
-import gambar from '@/app/assets/kobo.jpg';
+import { useMemo, useState } from 'react';
 import products from '@/../products.json';
+import gambar from '@/app/assets/kobo.jpg';
+import { ShoppingCart, MessageSquare, Menu, Sparkles, Filter } from 'lucide-react';
 
-export default function ChatPage() {
-	// Chat state
-	const [messages, setMessages] = useState([]);
-	const [input, setInput] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
+// shadcn/ui components
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
-	// Product state
-	const [recommendedProducts, setRecommendedProducts] = useState([]);
-	const [selectedProduct, setSelectedProduct] = useState(null);
+export default function HomePage() {
+	const [query, setQuery] = useState('');
+	const [category, setCategory] = useState('semua');
+	const [sortBy, setSortBy] = useState('terkini');
+	const cartCount = 3; // mock
 
-	// AI Debate state
-	const [comparisonList, setComparisonList] = useState([]);
-	const [isComparing, setIsComparing] = useState(false);
-	const [comparisonResult, setComparisonResult] = useState('');
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	// NEW: simpan pasangan produk yang dibandingkan
-	const [comparedPair, setComparedPair] = useState([]);
-
-	// NEW: thread & input follow-up khusus modal
-	const [followupInput, setFollowupInput] = useState('');
-	const [followupThread, setFollowupThread] = useState([]); // { role: 'user' | 'assistant', content: string }
-	const [isFollowupLoading, setIsFollowupLoading] = useState(false);
-
-	// Load chat from localStorage
-	useEffect(() => {
-		try {
-			const saved = localStorage.getItem('chat_messages');
-			if (saved) setMessages(JSON.parse(saved));
-		} catch (err) {
-			console.error('Failed to load messages from localStorage', err);
-		}
+	const categories = useMemo(() => {
+		const set = new Set(products.map((p) => p.kategori).filter(Boolean));
+		return ['semua', ...Array.from(set)];
 	}, []);
 
-	// Persist chat & parse product IDs from assistant reply
-useEffect(() => {
-	if (messages.length > 0) {
-		localStorage.setItem('chat_messages', JSON.stringify(messages));
-		const lastMessage = messages[messages.length - 1];
-		if (lastMessage && lastMessage.role === 'assistant') {
-			const ids = lastMessage.content.match(/\[ID:(\d+)\]/g) || [];
-			if (ids.length > 0) {
-				const productIds = ids.map((idString) => parseInt(idString.match(/\d+/)[0]));
-				const foundProducts = productIds.map((id) => products.find((p) => p.id === id)).filter(Boolean);
-				setRecommendedProducts(foundProducts);
-			} else {
-				// fallback: kalau AI tidak kasih ID sama sekali, tampilkan semua produk
-				setRecommendedProducts(products);
-			}
-		}
-	}
-}, [messages]);
- -
-
-	// Auto-select first product when recommendations appear
-	useEffect(() => {
-		if (!selectedProduct && recommendedProducts.length > 0) {
-			setSelectedProduct(recommendedProducts[0]);
-		}
-	}, [recommendedProducts, selectedProduct]);
-
-	const isSelectedForCompare = (p) => comparisonList.some((x) => x.id === p.id);
-
-	const toggleCompare = (product) => {
-		setComparisonList((prev) => {
-			const exists = prev.find((p) => p.id === product.id);
-			if (exists) return prev.filter((p) => p.id !== product.id);
-			if (prev.length < 2) return [...prev, product];
-			return prev; // ignore if already 2 selected
+	const filtered = useMemo(() => {
+		let list = products.filter((p) => {
+			const matchQuery = query ? p.nama?.toLowerCase().includes(query.toLowerCase()) || p.kategori?.toLowerCase().includes(query.toLowerCase()) : true;
+			const matchCat = category === 'semua' ? true : p.kategori === category;
+			return matchQuery && matchCat;
 		});
-	};
 
-	const handleStartComparison = async () => {
-		if (comparisonList.length !== 2) return;
+		if (sortBy === 'termurah') list.sort((a, b) => a.harga - b.harga);
+		if (sortBy === 'termahal') list.sort((a, b) => b.harga - a.harga);
+		if (sortBy === 'az') list.sort((a, b) => a.nama.localeCompare(b.nama));
+		if (sortBy === 'za') list.sort((a, b) => b.nama.localeCompare(a.nama));
 
-		setComparedPair([comparisonList[0], comparisonList[1]]); // NEW
-		setIsComparing(true);
-		setComparisonResult('');
-		setFollowupThread([]); // NEW
-		setIsModalOpen(true);
+		return list;
+	}, [query, category, sortBy]);
 
-		try {
-			const response = await fetch('/api/compare', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					productA: comparisonList[0],
-					productB: comparisonList[1],
-					userPersona: 'Pengguna yang mencari nilai terbaik untuk uang.',
-				}),
-			});
-
-			const data = await response.json();
-			if (!response.ok) throw new Error(data.error || 'Gagal mendapatkan perbandingan dari AI.');
-			setComparisonResult(data.reply);
-		} catch (error) {
-			setComparisonResult(`Terjadi kesalahan: ${error.message}`);
-		} finally {
-			setIsComparing(false);
-		}
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (!input.trim()) return;
-
-		const userMessage = { role: 'user', content: input };
-		const newMessages = [...messages, userMessage];
-		setMessages(newMessages);
-		setInput('');
-		setIsLoading(true);
-
-		try {
-			const response = await fetch('/api/chat', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ messages: newMessages }),
-			});
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.error || 'An unknown error occurred');
-			}
-			const data = await response.json();
-			setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
-		} catch (err) {
-			console.error('Failed to get response from AI', err);
-			setMessages((prev) => [...prev, { role: 'assistant', content: `Error: ${err.message}` }]);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	// NEW: follow-up Q&A di dalam dialog
-	const handleFollowupSubmit = async (e) => {
-		e.preventDefault();
-		const q = followupInput.trim();
-		if (!q || comparedPair.length !== 2) return;
-
-		const newThread = [...followupThread, { role: 'user', content: q }];
-		setFollowupThread(newThread);
-		setFollowupInput('');
-		setIsFollowupLoading(true);
-
-		// context: kasih dua produk + ringkasan hasil debat
-		const context =
-			`KONTEKS PERBANDINGAN (WAJIB DIPAKAI):\n` +
-			`Produk A: ${JSON.stringify(comparedPair[0])}\n` +
-			`Produk B: ${JSON.stringify(comparedPair[1])}\n` +
-			`Ringkasan AI sebelumnya:\n${comparisonResult}\n` +
-			`Instruksi: Jawab pertanyaan user hanya terkait dua produk ini. ` +
-			`Jika info tidak tersedia, bilang jujur lalu sarankan cara cek (tanpa mengarang). ` +
-			`Gunakan Markdown rapi dan bullet points bila perlu.`;
-
-		try {
-			const res = await fetch('/api/chat', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ messages: newThread, context }), // <— kirim context
-			});
-			const data = await res.json();
-			if (!res.ok) throw new Error(data.error || 'Gagal mendapatkan jawaban lanjutan.');
-			setFollowupThread((prev) => [...prev, { role: 'assistant', content: data.reply }]);
-		} catch (err) {
-			setFollowupThread((prev) => [...prev, { role: 'assistant', content: `Error: ${err.message}` }]);
-		} finally {
-			setIsFollowupLoading(false);
-		}
-	};
-
-	// Memoized empty states
-	const hasRecommendations = recommendedProducts.length > 0;
+	const formatIDR = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
 
 	return (
-		<div className="h-screen w-full bg-gradient-to-br from-slate-50 to-slate-100 text-slate-800">
-			<div className="mx-auto h-full max-w-7xl grid grid-rows-[auto_1fr]">
-				{/* Header */}
-				<header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b border-slate-200">
-					<div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-3">
-						<div className="h-9 w-9 grid place-items-center rounded-xl bg-slate-900 text-white shadow-sm">
-							<MessageSquare className="h-5 w-5" />
+		<div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white">
+			{/* Header */}
+			<header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+				<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex h-16 items-center justify-between">
+						{/* Left: Brand */}
+						<div className="flex items-center gap-2">
+							<Sparkles className="h-6 w-6 text-blue-600" />
+							<Link href="/" className="text-xl font-extrabold tracking-tight">
+								ShopMate
+							</Link>
+							<Badge variant="secondary" className="hidden md:inline-flex">
+								AI
+							</Badge>
 						</div>
-						<div className="flex-1">
-							<h1 className="text-lg font-semibold tracking-tight">AI Shop Assistant</h1>
-							<p className="text-xs text-slate-500">Cari, bandingkan, dan debatkan produk dengan AI</p>
+
+						{/* Center: Controls (desktop) */}
+						<div className="hidden md:flex items-center gap-3 max-w-xl w-full">
+							<Input placeholder="Cari produk, kategori..." value={query} onChange={(e) => setQuery(e.target.value)} className="w-full" />
+							<Select value={category} onValueChange={setCategory}>
+								<SelectTrigger className="min-w-[140px]">
+									<SelectValue placeholder="Kategori" />
+								</SelectTrigger>
+								<SelectContent>
+									{categories.map((c) => (
+										<SelectItem key={c} value={c}>
+											{c[0].toUpperCase() + c.slice(1)}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+							<Select value={sortBy} onValueChange={setSortBy}>
+								<SelectTrigger className="min-w-[150px]">
+									<SelectValue placeholder="Urutkan" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="terkini">Terbaru</SelectItem>
+									<SelectItem value="termurah">Harga: Termurah</SelectItem>
+									<SelectItem value="termahal">Harga: Termahal</SelectItem>
+									<SelectItem value="az">Nama: A–Z</SelectItem>
+									<SelectItem value="za">Nama: Z–A</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
+
+						{/* Right: Actions */}
+						<div className="flex items-center gap-2">
+							<Button asChild className="hidden sm:inline-flex">
+								<Link href="/chat" className="inline-flex items-center gap-2">
+									<MessageSquare className="h-4 w-4" /> Mulai Chat AI
+								</Link>
+							</Button>
+
+							<Button variant="outline" className="relative" aria-label="Buka keranjang">
+								<ShoppingCart className="h-5 w-5" />
+								<span className="absolute -top-2 -right-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[10px] font-semibold text-white">{cartCount}</span>
+							</Button>
+
+							{/* Mobile menu */}
+							<Sheet>
+								<SheetTrigger asChild>
+									<Button variant="ghost" size="icon" className="md:hidden" aria-label="Buka menu">
+										<Menu className="h-5 w-5" />
+									</Button>
+								</SheetTrigger>
+								<SheetContent side="right" className="w-[320px] sm:w-[380px]">
+									<SheetHeader>
+										<SheetTitle>Filter & Pencarian</SheetTitle>
+									</SheetHeader>
+									<div className="mt-4 space-y-3">
+										<Input placeholder="Cari produk..." value={query} onChange={(e) => setQuery(e.target.value)} />
+										<div className="grid grid-cols-2 gap-3">
+											<Select value={category} onValueChange={setCategory}>
+												<SelectTrigger>
+													<SelectValue placeholder="Kategori" />
+												</SelectTrigger>
+												<SelectContent>
+													{categories.map((c) => (
+														<SelectItem key={c} value={c}>
+															{c[0].toUpperCase() + c.slice(1)}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+
+											<Select value={sortBy} onValueChange={setSortBy}>
+												<SelectTrigger>
+													<SelectValue placeholder="Urutkan" />
+												</SelectTrigger>
+												<SelectContent>
+													<SelectItem value="terkini">Terbaru</SelectItem>
+													<SelectItem value="termurah">Termurah</SelectItem>
+													<SelectItem value="termahal">Termahal</SelectItem>
+													<SelectItem value="az">A–Z</SelectItem>
+													<SelectItem value="za">Z–A</SelectItem>
+												</SelectContent>
+											</Select>
+										</div>
+										<div className="flex items-center gap-2 text-sm text-muted-foreground">
+											<Filter className="h-4 w-4" />
+											<span>{filtered.length} produk</span>
+										</div>
+										<Button asChild className="w-full">
+											<Link href="/chat" className="inline-flex items-center gap-2">
+												<MessageSquare className="h-4 w-4" /> Tanya rekomendasi AI
+											</Link>
+										</Button>
+									</div>
+								</SheetContent>
+							</Sheet>
 						</div>
 					</div>
-				</header>
+				</div>
+			</header>
 
-				{/* Content */}
-				<main className="grid h-full grid-cols-1 md:grid-cols-2">
-					{/* LEFT: Products */}
-					<section className="hidden md:flex h-full flex-col gap-6 p-6">
-						{/* Product Detail */}
-						<div className="bg-white/90 rounded-2xl shadow-sm ring-1 ring-slate-200 p-6">
-							<h2 className="text-xl font-bold mb-4">Detail Produk</h2>
-							{selectedProduct ? (
-								<div className="space-y-4">
-									<Image src={gambar} alt={selectedProduct.nama} width={800} height={480} priority className="w-full h-64 object-cover rounded-xl" />
-									<div>
-										<h3 className="text-lg font-semibold tracking-tight">{selectedProduct.nama}</h3>
-										<p className="text-blue-600 font-semibold text-lg my-1">Rp {selectedProduct.harga.toLocaleString('id-ID')}</p>
-										<p className="text-slate-600 leading-relaxed">{selectedProduct.deskripsi}</p>
-									</div>
-								</div>
-							) : (
-								<EmptyState title="Belum ada produk terpilih" description="Pilih produk dari rekomendasi di bawah." />
-							)}
+			{/* Hero */}
+			<section className="relative">
+				<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+					<div className="rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-8 md:p-12 text-white shadow-lg">
+						<div className="mx-auto max-w-3xl text-center">
+							<h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+								Temukan Produk Impian dengan <span className="underline decoration-white/40 underline-offset-4">Bantuan AI</span>
+							</h1>
+							<p className="mt-4 text-white/90 text-lg">Jelajahi katalog kami, filter cepat, dan konsultasi dengan asisten AI untuk rekomendasi yang pas.</p>
+							<div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+								<Button asChild size="lg" variant="secondary" className="font-semibold">
+									<Link href="/chat">Mulai Chat dengan AI</Link>
+								</Button>
+								<Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
+									Lihat Produk Unggulan
+								</Button>
+							</div>
 						</div>
+					</div>
+				</div>
+			</section>
 
-						{/* Recommendations */}
-						<div className="flex-1 overflow-y-auto bg-white/90 rounded-2xl shadow-sm ring-1 ring-slate-200 p-6">
-							<h2 className="text-lg font-semibold mb-4">Produk Rekomendasi</h2>
-							{hasRecommendations ? (
-								<div className="space-y-3">
-									{recommendedProducts.map((product) => (
-										<button
-											key={product.id}
-											onClick={() => setSelectedProduct(product)}
-											className={`group w-full text-left p-3 rounded-xl border transition-all flex items-center gap-4 hover:shadow-sm ${
-												selectedProduct?.id === product.id ? 'border-blue-500 ring-2 ring-blue-100' : 'border-slate-200 hover:border-slate-300'
-											}`}
-											aria-label={`Pilih produk ${product.nama}`}
-										>
-											<Image src={gambar} alt={product.nama} width={80} height={80} className="h-20 w-20 object-cover rounded-lg" />
-											<div className="flex-1 min-w-0">
-												<p className="font-medium truncate">{product.nama}</p>
-												<p className="text-blue-600 font-semibold">Rp {product.harga.toLocaleString('id-ID')}</p>
-											</div>
-											<span
-												onClick={(e) => {
-													e.stopPropagation();
-													toggleCompare(product);
-												}}
-												className={`shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-sm transition-colors ${
-													isSelectedForCompare(product) ? 'bg-blue-50 text-blue-700 border-blue-300' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-												}`}
-												role="button"
-												aria-label={isSelectedForCompare(product) ? 'Hapus dari perbandingan' : 'Tambah ke perbandingan'}
-											>
-												<Scale className="h-4 w-4" />
-												{isSelectedForCompare(product) ? 'Dipilih' : 'Bandingkan'}
-											</span>
-										</button>
+			{/* Toolbar (desktop sticky under header) */}
+			<div className="sticky top-16 z-30 hidden md:block border-b bg-background/80 backdrop-blur">
+				<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex h-14 items-center justify-between gap-4">
+						<div className="flex items-center gap-3 flex-1 max-w-2xl">
+							<Input placeholder="Cari produk, kategori..." value={query} onChange={(e) => setQuery(e.target.value)} />
+							<Select value={category} onValueChange={setCategory}>
+								<SelectTrigger className="w-[160px]">
+									<SelectValue placeholder="Kategori" />
+								</SelectTrigger>
+								<SelectContent>
+									{categories.map((c) => (
+										<SelectItem key={c} value={c}>
+											{c[0].toUpperCase() + c.slice(1)}
+										</SelectItem>
 									))}
-
-									{comparisonList.length > 0 && (
-										<button
-											onClick={handleStartComparison}
-											disabled={comparisonList.length !== 2 || isComparing}
-											className="w-full mt-2 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-green-600 text-white disabled:bg-green-300 disabled:cursor-not-allowed hover:bg-green-700 transition-colors"
-										>
-											{isComparing ? (
-												<>
-													<Loader2 className="h-4 w-4 animate-spin" /> AI Sedang Berdebat...
-												</>
-											) : (
-												<>
-													<Sparkles className="h-4 w-4" /> Debatkan {comparisonList.length}/2 Produk
-												</>
-											)}
-										</button>
-									)}
-								</div>
-							) : (
-								<EmptyState title="Belum ada rekomendasi" description="AI akan merekomendasikan produk di sini..." />
-							)}
+								</SelectContent>
+							</Select>
+							<Select value={sortBy} onValueChange={setSortBy}>
+								<SelectTrigger className="w-[180px]">
+									<SelectValue placeholder="Urutkan" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="terkini">Terbaru</SelectItem>
+									<SelectItem value="termurah">Harga: Termurah</SelectItem>
+									<SelectItem value="termahal">Harga: Termahal</SelectItem>
+									<SelectItem value="az">Nama: A–Z</SelectItem>
+									<SelectItem value="za">Nama: Z–A</SelectItem>
+								</SelectContent>
+							</Select>
 						</div>
-					</section>
-
-					{/* RIGHT: Chat */}
-					<section className="flex h-full flex-col bg-white md:border-l md:border-slate-200">
-						{/* Messages */}
-						<div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
-							{messages.map((msg, i) => (
-								<div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-									<div className={`${msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'} max-w-lg px-4 py-2 rounded-2xl shadow-sm`}>
-										<div className="prose prose-invert max-w-none">
-											<ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
-										</div>
-									</div>
-								</div>
-							))}
-
-							{isLoading && (
-								<div className="flex justify-start">
-									<div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 text-slate-600">
-										<Loader2 className="h-4 w-4 animate-spin" /> AI is thinking...
-									</div>
-								</div>
-							)}
-
-							{messages.length === 0 && !isLoading && <EmptyState title="Mulai percakapan" description="Tanya apa saja: minta rekomendasi, bandingkan produk, atau paste spesifikasi." icon={<ArrowRight className="h-4 w-4" />} />}
-						</div>
-
-						{/* Composer */}
-						<div className="p-4 border-t border-slate-200">
-							<form onSubmit={handleSubmit} className="flex gap-2">
-								<input
-									value={input}
-									onChange={(e) => setInput(e.target.value)}
-									placeholder="Ketik pesan Anda..."
-									className="flex-1 p-3 border rounded-xl text-slate-900 outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400"
-									disabled={isLoading}
-									aria-label="Ketik pesan"
-								/>
-								<button
-									type="submit"
-									disabled={isLoading}
-									className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-300 transition-colors"
-									aria-label="Kirim pesan"
-								>
-									<Send className="h-4 w-4" />
-								</button>
-							</form>
-						</div>
-					</section>
-				</main>
+						<div className="text-sm text-muted-foreground whitespace-nowrap">{filtered.length} produk ditemukan</div>
+					</div>
+				</div>
 			</div>
 
-			{/* Comparison Modal */}
-			<Dialog open={isModalOpen} onOpenChange={setIsModalOpen} modal={false}>
-				<DialogContent className="max-w-4xl h-[85vh] flex flex-col gap-3">
-					<DialogHeader>
-						<DialogTitle>Hasil Debat Produk AI</DialogTitle>
-					</DialogHeader>
+			{/* Product Grid */}
+			<main className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+				<h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Produk Pilihan</h2>
+				<p className="mt-1 text-sm text-muted-foreground">Kurasi terbaik dari katalog kami. Gunakan filter untuk hasil yang lebih presisi.</p>
+				<Separator className="my-6" />
 
-					<div className="flex-1 overflow-y-auto pr-1 space-y-4">
-						{isComparing ? (
-							<div className="h-full grid place-items-center text-slate-600">
-								<div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100">
-									<Loader2 className="h-4 w-4 animate-spin" /> AI sedang menganalisis...
+				{filtered.length === 0 ? (
+					<EmptyState />
+				) : (
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+						{filtered.map((product) => (
+							<Card key={product.id} className="group overflow-hidden hover:shadow-xl transition-all">
+								<div className="relative aspect-[4/3] w-full overflow-hidden">
+									<Image
+										src={gambar}
+										alt={product.nama}
+										fill
+										className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+										sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+										priority={false}
+									/>
 								</div>
-							</div>
-						) : (
-							<div className="prose max-w-none">
-								<ReactMarkdown remarkPlugins={[remarkGfm]}>{comparisonResult}</ReactMarkdown>
-							</div>
-						)}
-
-						{/* NEW: thread follow-up di dalam dialog */}
-						{followupThread.length > 0 && (
-							<div className="space-y-3 border-t pt-3">
-								{followupThread.map((m, idx) => (
-									<div key={idx} className={`${m.role === 'user' ? 'bg-blue-50' : 'bg-slate-50'} rounded-xl p-3`}>
-										<div className="prose max-w-none">
-											<ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
+								<CardHeader className="pb-2">
+									<CardTitle className="truncate text-base md:text-lg">{product.nama}</CardTitle>
+								</CardHeader>
+								<CardContent className="pt-0">
+									<div className="flex items-center justify-between">
+										<div className="space-y-1">
+											<p className="text-sm text-muted-foreground">{product.kategori}</p>
+											<p className="text-xl font-bold text-blue-600">{formatIDR(product.harga)}</p>
+										</div>
+										<div className="flex items-center gap-2">
+											<Badge variant="outline">Baru</Badge>
+											<Button variant="secondary" size="sm">
+												Detail
+											</Button>
 										</div>
 									</div>
-								))}
-							</div>
-						)}
+								</CardContent>
+							</Card>
+						))}
 					</div>
+				)}
+			</main>
 
-					<DialogFooter className="flex flex-col gap-2">
-						{/* NEW: input follow-up */}
-						<form onSubmit={handleFollowupSubmit} className="w-full flex items-center gap-2">
-							<input
-								value={followupInput}
-								onChange={(e) => setFollowupInput(e.target.value)}
-								placeholder="Tanya detail lanjutan tentang dua produk ini..."
-								className="flex-1 p-3 border rounded-xl text-slate-900 outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400"
-								aria-label="Pertanyaan lanjutan"
-							/>
-							<button type="submit" disabled={isFollowupLoading} className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-300 transition-colors">
-								{isFollowupLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-								<span className="sr-only">Kirim pertanyaan lanjutan</span>
-							</button>
-						</form>
-
-						{/* <button onClick={() => setIsModalOpen(false)} className="inline-flex self-end items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 text-slate-800 hover:bg-slate-200" aria-label="Tutup hasil debat">
-							<X className="h-4 w-4" /> Tutup
-						</button> */}
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
+			{/* Footer */}
+			<footer className="border-t py-8">
+				<div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
+					<p>© {new Date().getFullYear()} ShopMate AI — Dibuat untuk Hackathon.</p>
+					<p className="mt-1">Ditenagai oleh rekomendasi AI untuk pengalaman belanja yang lebih cerdas.</p>
+				</div>
+			</footer>
 		</div>
 	);
 }
 
-/** --------------------- Utility UI ---------------------- */
-function EmptyState({ title, description, icon }) {
+function EmptyState() {
 	return (
-		<div className="flex flex-col items-center justify-center text-center py-10 px-4 border border-dashed rounded-2xl bg-slate-50 text-slate-600">
-			<div className="mb-2">{icon ?? <Loader2 className="h-5 w-5" />}</div>
-			<p className="font-medium">{title}</p>
-			<p className="text-sm text-slate-500 mt-1 max-w-sm">{description}</p>
+		<div className="flex flex-col items-center justify-center rounded-2xl border bg-card p-10 text-center">
+			<div className="rounded-full bg-blue-50 p-3">
+				<Sparkles className="h-6 w-6 text-blue-600" />
+			</div>
+			<h3 className="mt-4 text-lg font-semibold">Belum ada hasil</h3>
+			<p className="mt-1 max-w-md text-sm text-muted-foreground">Coba ubah kata kunci atau kategori. Kamu juga bisa bertanya ke asisten AI untuk rekomendasi yang lebih tepat.</p>
+			<Button asChild className="mt-4">
+				<Link href="/chat" className="inline-flex items-center gap-2">
+					<MessageSquare className="h-4 w-4" /> Tanya AI Sekarang
+				</Link>
+			</Button>
 		</div>
 	);
 }

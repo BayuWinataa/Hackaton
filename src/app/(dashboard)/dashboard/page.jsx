@@ -15,8 +15,11 @@ export default function DashboardPage() {
 					const json = await res.json();
 					setInvoices(json.data || []);
 				}
-			} catch {}
-			setLoading(false);
+			} catch (error) {
+				console.error(error);
+			} finally {
+				setLoading(false);
+			}
 		})();
 	}, []);
 
