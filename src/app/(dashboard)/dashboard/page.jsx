@@ -1,93 +1,103 @@
-'use client';
+// app/(site)/dashboard/page.jsx
+import { redirect } from 'next/navigation';
+import { getSessionUser } from '@/lib/auth';
+import { Card, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
-import { useEffect, useState } from 'react';
+export const metadata = { title: 'Dashboard' };
 
-export default function DashboardPage() {
-	const [invoices, setInvoices] = useState([]);
-	const [loading, setLoading] = useState(false);
+export default async function DashboardPage() {
+  const user = await getSessionUser();
+  if (!user) {
+    redirect('/login?next=/dashboard');
+  }
 
-	useEffect(() => {
-		(async () => {
-			setLoading(true);
-			try {
-				const res = await fetch('/api/invoices', { cache: 'no-store' });
-				if (res.ok) {
-					const json = await res.json();
-					setInvoices(json.data || []);
-				}
-			} catch (error) {
-				console.error(error);
-			} finally {
-				setLoading(false);
-			}
-		})();
-	}, []);
+  return (
+    <div className="space-y-6">
+      {/* Header dalam content */}
+      <div>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Dashboard</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Selamat datang, <span className="font-semibold">{user.name || user.email}</span>.
+        </p>
+      </div>
 
-	const totalBelanja = invoices.reduce((sum, x) => sum + (x.total || 0), 0);
-	const merchants = new Set(invoices.map((x) => x.merchant).filter(Boolean));
+      <Separator />
 
-	return (
-		<div className="space-y-6">
-			<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-				<div className="bg-white rounded-xl p-4 ring-1 ring-slate-200">
-					<div className="text-sm text-slate-500">Total Invoice</div>
-					<div className="text-2xl font-semibold">{invoices.length}</div>
-				</div>
-				<div className="bg-white rounded-xl p-4 ring-1 ring-slate-200">
-					<div className="text-sm text-slate-500">Total Belanja</div>
-					<div className="text-2xl font-semibold">Rp {totalBelanja.toLocaleString('id-ID')}</div>
-				</div>
-				<div className="bg-white rounded-xl p-4 ring-1 ring-slate-200">
-					<div className="text-sm text-slate-500">Toko Unik</div>
-					<div className="text-2xl font-semibold">{merchants.size}</div>
-				</div>
-			</div>
+      {/* Example stats / quick glance */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-sm text-slate-500">Total Orders</div>
+            <div className="mt-1 text-2xl font-bold">12</div>
+            <div className="text-xs text-slate-500">+3 this month</div>
+          </CardContent>
+        </Card>
 
-			<div className="bg-white rounded-xl ring-1 ring-slate-200 overflow-hidden">
-				<div className="px-4 py-3 border-b border-slate-200 flex items-center justify-between">
-					<h2 className="text-base font-semibold">Latest Invoices</h2>
-					<a href="/" className="text-sm text-blue-600 hover:underline">
-						Kembali ke App
-					</a>
-				</div>
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-sm text-slate-500">Spent</div>
+            <div className="mt-1 text-2xl font-bold">Rp 4.250.000</div>
+            <div className="text-xs text-slate-500">+Rp 750k this month</div>
+          </CardContent>
+        </Card>
 
-				<div className="overflow-x-auto">
-					<table className="min-w-full text-sm">
-						<thead className="bg-slate-50">
-							<tr className="text-left text-slate-600">
-								<th className="px-4 py-2">ID</th>
-								<th className="px-4 py-2">Toko</th>
-								<th className="px-4 py-2">Tanggal</th>
-								<th className="px-4 py-2">Total</th>
-							</tr>
-						</thead>
-						<tbody>
-							{loading ? (
-								<tr>
-									<td className="px-4 py-4" colSpan="4">
-										Loading...
-									</td>
-								</tr>
-							) : invoices.length === 0 ? (
-								<tr>
-									<td className="px-4 py-4" colSpan="4">
-										Belum ada data.
-									</td>
-								</tr>
-							) : (
-								invoices.map((inv) => (
-									<tr key={inv.id} className="border-t">
-										<td className="px-4 py-2">{inv.id}</td>
-										<td className="px-4 py-2">{inv.merchant || '-'}</td>
-										<td className="px-4 py-2">{inv.invoiceDate ? new Date(inv.invoiceDate).toISOString().slice(0, 10) : '-'}</td>
-										<td className="px-4 py-2">{inv.total != null ? `Rp ${Number(inv.total).toLocaleString('id-ID')}` : '-'}</td>
-									</tr>
-								))
-							)}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	);
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-sm text-slate-500">Invoices</div>
+            <div className="mt-1 text-2xl font-bold">5</div>
+            <div className="text-xs text-slate-500">2 unpaid</div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-sm text-slate-500">Last Chat</div>
+            <div className="mt-1 text-2xl font-bold">2h ago</div>
+            <div className="text-xs text-slate-500">See history</div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent section */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Card>
+          <CardContent className="p-4">
+            <div className="mb-3 text-sm font-semibold">Recent Orders</div>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-center justify-between rounded-lg border px-3 py-2">
+                <span className="truncate">#INV-2301 • Headphone Pro</span>
+                <span className="text-slate-600">Rp 1.500.000</span>
+              </li>
+              <li className="flex items-center justify-between rounded-lg border px-3 py-2">
+                <span className="truncate">#INV-2299 • Smartwatch 2</span>
+                <span className="text-slate-600">Rp 950.000</span>
+              </li>
+              <li className="flex items-center justify-between rounded-lg border px-3 py-2">
+                <span className="truncate">#INV-2295 • Keyboard MX</span>
+                <span className="text-slate-600">Rp 799.000</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="mb-3 text-sm font-semibold">Recent Chats</div>
+            <ul className="space-y-2 text-sm">
+              <li className="rounded-lg border px-3 py-2">
+                “Bandingkan Headphone Pro vs AirBass 3…” — <span className="text-slate-500">2h ago</span>
+              </li>
+              <li className="rounded-lg border px-3 py-2">
+                “Ada smartwatch  1jt nggak?” — <span className="text-slate-500">1d ago</span>
+              </li>
+              <li className="rounded-lg border px-3 py-2">
+                “Minta rekomendasi monitor 27 inch 2K” — <span className="text-slate-500">3d ago</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
 }

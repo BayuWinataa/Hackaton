@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
+import { getSessionUser } from '@/lib/auth';
 
 export async function GET() {
-	// TODO: baca cookie & verify token
-	return NextResponse.json({ user: { id: 1, name: 'Demo User', email: 'demo@example.com' } });
+	const user = await getSessionUser();
+	if (!user) return NextResponse.json({ ok: false }, { status: 401 });
+	return NextResponse.json({ ok: true, user });
 }

@@ -1,35 +1,29 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function LoginPage() {
 	const router = useRouter();
-	const params = useSearchParams();
-	const from = params.get('from') || '/dashboard';
+	const search = useSearchParams();
+	const next = search.get('next') || '/dashboard';
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [form, setForm] = useState({ email: '', password: '' });
 	const [loading, setLoading] = useState(false);
-	const [err, setErr] = useState(null);
+	const [err, setErr] = useState('');
 
-	const onSubmit = async (e) => {
+	const submit = async (e) => {
 		e.preventDefault();
-		setErr(null);
 		setLoading(true);
+		setErr('');
 		try {
 			const res = await fetch('/api/auth/login', {
 				method: 'POST',
-				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ email, password }),
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(form),
 			});
 			const data = await res.json();
 			if (!res.ok) throw new Error(data.error || 'Login gagal');
-
-			// Demo: set cookie di client. Production: set HttpOnly cookie di route.js
-			document.cookie = `token=${data.token}; path=/; max-age=86400`;
-
-			router.replace(from);
+			router.replace(next);
 		} catch (e) {
 			setErr(e.message);
 		} finally {
@@ -38,33 +32,22 @@ export default function LoginPage() {
 	};
 
 	return (
-		<>
-			<h1 className="text-xl font-semibold mb-1">Masuk</h1>
-			<p className="text-sm text-slate-500 mb-6">Gunakan akunmu untuk masuk ke dashboard.</p>
-
-			<form onSubmit={onSubmit} className="space-y-3">
-				<div>
-					<label className="text-sm font-medium">Email</label>
-					<input type="email" className="mt-1 w-full rounded-lg border p-2 outline-none focus:ring-2 focus:ring-blue-200" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required />
-				</div>
-				<div>
-					<label className="text-sm font-medium">Password</label>
-					<input type="password" className="mt-1 w-full rounded-lg border p-2 outline-none focus:ring-2 focus:ring-blue-200" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required />
-				</div>
-
-				{err && <p className="text-sm text-red-600">{err}</p>}
-
-				<button type="submit" disabled={loading} className="w-full rounded-lg bg-blue-600 text-white py-2 hover:bg-blue-700 disabled:bg-blue-300">
-					{loading ? 'Memproses...' : 'Masuk'}
+		<div className="max-w-sm mx-auto p-6">
+			<h1 className="text-2xl font-bold">Masuk</h1>
+			<form onSubmit={submit} className="mt-4 space-y-3">
+				<input className="w-full border rounded px-3 py-2" placeholder="Email" type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
+				<input className="w-full border rounded px-3 py-2" placeholder="Password" type="password" value={form.password} onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))} />
+				{err && <div className="text-sm text-red-600">{err}</div>}
+				<button disabled={loading} className="w-full bg-blue-600 text-white rounded py-2">
+					{loading ? 'Memproses…' : 'Masuk'}
 				</button>
+				<p className="text-sm mt-2">
+					Belum punya akun?{' '}
+					<a href={`/register?next=${encodeURIComponent(next)}`} className="underline">
+						Daftar
+					</a>
+				</p>
 			</form>
-
-			<div className="mt-4 text-sm">
-				Belum punya akun?{' '}
-				<a className="text-blue-600 hover:underline" href="/register">
-					Daftar
-				</a>
-			</div>
-		</>
+		</div>
 	);
 }

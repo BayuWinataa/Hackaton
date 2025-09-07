@@ -3,90 +3,100 @@
 		"id": 1,
 		"nama": "Headphone Peredam Bising Pro",
 		"harga": 1500000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"gambar": "https://images.unsplash.com/photo-1583226170775-1c8a2b86aa3b?q=80&w=1200&auto=format&fit=crop",
 		"kategori": "elektronik",
-		"deskripsi": "Headphone canggih dengan teknologi peredam bising aktif, cocok untuk bekerja, belajar, atau traveling. Kualitas suara jernih dengan bass yang dalam.",
-		"tags": ["audio", "gadget", "travel", "fokus", "premium", "musik"]
+		"deskripsi": "Headphone canggih dengan teknologi peredam bising aktif. Suara jernih, bass dalam, cocok untuk kerja, belajar, atau traveling.",
+		"longDeskripsi": "Nikmati pengalaman mendengarkan musik tanpa gangguan dengan Headphone Peredam Bising Pro. Dilengkapi dengan teknologi peredam bising aktif yang efektif mengurangi suara bising dari lingkungan sekitar, headphone ini memungkinkan Anda untuk fokus pada musik atau panggilan telepon Anda. Dengan driver audio berkualitas tinggi, headphone ini menghasilkan suara jernih dan bass yang dalam, memberikan pengalaman audio yang memukau. Desainnya yang ergonomis dan bantalan telinga yang lembut memastikan kenyamanan saat digunakan dalam waktu lama. Ideal untuk bekerja, belajar, atau bepergian, Headphone Peredam Bising Pro adalah pilihan sempurna bagi mereka yang menghargai kualitas suara dan kenyamanan.",
+		"tags": ["audio", "gadget", "travel", "premium", "musik"]
 	},
 	{
 		"id": 2,
-		"nama": "Paket Biji Kopi Arabika Pilihan",
-		"harga": 250000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
-		"kategori": "makanan & minuman",
-		"deskripsi": "Satu set berisi 3 varian biji kopi Arabika dari Gayo, Toraja, dan Kintamani. Cocok untuk pecinta kopi sejati atau sebagai hadiah.",
-		"tags": ["kopi", "hadiah", "pagi", "gourmet", "minuman"]
+		"nama": "Smartphone Super AMOLED X",
+		"harga": 4500000,
+		"gambar": "https://images.unsplash.com/photo-1510557880182-3f8c5f0c9f38?q=80&w=1200&auto=format&fit=crop",
+		"kategori": "elektronik",
+		"longDeskripsi": "Smartphone Super AMOLED X hadir dengan layar Super AMOLED 6.5 inci yang menampilkan warna-warna cerah dan kontras tinggi, memberikan pengalaman visual yang memukau. Ditenagai oleh prosesor octa-core terbaru dan RAM 6GB, smartphone ini mampu menjalankan aplikasi dan game berat dengan lancar tanpa lag. Kamera belakang 64MP dengan fitur AI canggih memungkinkan Anda mengambil foto berkualitas tinggi dalam berbagai kondisi pencahayaan, sementara kamera depan 16MP sempurna untuk selfie dan panggilan video. Dengan baterai berkapasitas 4500mAh yang tahan lama, Anda dapat menggunakan smartphone ini sepanjang hari tanpa khawatir kehabisan daya. Smartphone Super AMOLED X juga dilengkapi dengan sistem operasi Android terbaru, memberikan akses ke berbagai aplikasi dan fitur terkini.",
+		"deskripsi": "Smartphone dengan layar Super AMOLED, kamera 64MP, dan baterai tahan lama untuk kebutuhan sehari-hari.",
+		"tags": ["smartphone", "android", "gadget", "mobile"]
 	},
 	{
 		"id": 3,
-		"nama": "Novel Fiksi Ilmiah 'Gerbang Semesta'",
-		"harga": 120000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
-		"kategori": "buku",
-		"deskripsi": "Novel best-seller tentang perjalanan antar dimensi yang menegangkan dan penuh teka-teki. Wajib dibaca oleh penggemar fiksi ilmiah.",
-		"tags": ["buku", "fiksi", "petualangan", "hadiah", "membaca"]
+		"nama": "Sepatu Sneakers Streetwear",
+		"harga": 750000,
+		"gambar": "https://images.unsplash.com/photo-1600180758895-098d3a2c2aeb?q=80&w=1200&auto=format&fit=crop",
+		"kategori": "fashion",
+		"longDeskripsi": "Sepatu Sneakers Streetwear dirancang untuk memberikan kenyamanan dan gaya dalam satu paket. Terbuat dari bahan berkualitas tinggi, sepatu ini memiliki sol karet yang tahan lama dan memberikan traksi optimal di berbagai permukaan. Desainnya yang trendi dengan kombinasi warna yang menarik membuatnya cocok untuk berbagai kesempatan, baik untuk aktivitas sehari-hari maupun hangout bersama teman. Dengan bantalan empuk di bagian dalam, sepatu ini memastikan kenyamanan maksimal saat digunakan dalam waktu lama. Sepatu Sneakers Streetwear adalah pilihan sempurna bagi mereka yang ingin tampil gaya tanpa mengorbankan kenyamanan.",
+		"deskripsi": "Sneakers bergaya streetwear dengan desain trendi, nyaman dipakai harian maupun hangout bareng teman.",
+		"tags": ["sneakers", "shoes", "fashion", "streetwear"]
 	},
 	{
 		"id": 4,
-		"nama": "Smartwatch Pelacak Kebugaran V5",
-		"harga": 850000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
-		"kategori": "elektronik",
-		"deskripsi": "Jam tangan pintar dengan GPS, monitor detak jantung, dan pelacak tidur. Tahan air hingga 50m dan baterai tahan hingga 7 hari. Kompatibel dengan Android dan iOS.",
-		"tags": ["smartwatch", "kesehatan", "olahraga", "gadget", "lari", "fitness"]
+		"nama": "Jam Tangan Klasik Leather",
+		"harga": 1200000,
+		"gambar": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
+		"kategori": "aksesoris",
+		"longDeskripsi": "Jam Tangan Klasik Leather adalah perpaduan sempurna antara desain elegan dan fungsionalitas. Dilengkapi dengan strap kulit asli yang lembut dan tahan lama, jam tangan ini memberikan sentuhan klasik pada penampilan Anda. Dialnya yang minimalis dengan penanda waktu yang jelas memudahkan Anda untuk membaca waktu dengan cepat. Mesin jam berkualitas tinggi memastikan akurasi waktu yang optimal, sementara casing stainless steel memberikan perlindungan ekstra terhadap goresan dan benturan. Cocok untuk digunakan dalam berbagai kesempatan, baik formal maupun casual, Jam Tangan Klasik Leather adalah aksesori wajib bagi mereka yang menghargai gaya dan kualitas.",
+		"deskripsi": "Jam tangan dengan strap kulit asli dan desain klasik elegan. Cocok untuk gaya formal maupun casual.",
+		"tags": ["jam tangan", "aksesoris", "fashion", "classic"]
 	},
 	{
 		"id": 5,
-		"nama": "Ransel Laptop Anti Air",
-		"harga": 450000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
-		"kategori": "fashion & aksesoris",
-		"deskripsi": "Ransel modern dengan kompartemen laptop hingga 15 inci, dibuat dari bahan anti air. Desain minimalis cocok untuk kerja atau kuliah.",
-		"tags": ["tas", "ransel", "laptop", "kerja", "kuliah", "travel"]
+		"nama": "Kacamata Stylish Hitam",
+		"harga": 300000,
+		"gambar": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1200&auto=format&fit=crop",
+		"kategori": "fashion",
+		"longDeskripsi": "Kacamata Stylish Hitam dirancang untuk memberikan perlindungan optimal bagi mata Anda sekaligus menambah sentuhan gaya pada penampilan sehari-hari. Dilengkapi dengan lensa UV400 yang mampu menyaring 100% sinar UVA dan UVB, kacamata ini melindungi mata dari bahaya sinar ultraviolet yang dapat merusak penglihatan. Frame hitam tebal dengan desain modern dan unisex membuatnya cocok untuk berbagai bentuk wajah dan gaya berpakaian. Kacamata ini juga ringan dan nyaman dipakai dalam waktu lama, menjadikannya pilihan ideal untuk aktivitas outdoor seperti berkendara, berjalan-jalan, atau berolahraga. Dengan Kacamata Stylish Hitam, Anda tidak hanya melindungi mata tetapi juga tampil percaya diri dan modis.",
+		"deskripsi": "Kacamata gaya dengan frame hitam tebal, menambah kesan stylish dan percaya diri.",
+		"tags": ["kacamata", "aksesoris", "style", "genz"]
 	},
 	{
 		"id": 6,
 		"nama": "Keyboard Mekanikal Gaming RGB",
 		"harga": 980000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"gambar": "https://images.unsplash.com/photo-1525973132219-a04334a76080?q=80&w=1200&auto=format&fit=crop",
 		"kategori": "elektronik",
-		"deskripsi": "Keyboard mekanikal dengan switch biru yang responsif dan lampu latar RGB yang bisa diatur. Didesain untuk performa gaming maksimal.",
+		"deskripsi": "Keyboard mekanikal dengan switch responsif dan lampu latar RGB yang bisa diatur. Didesain untuk performa gaming maksimal.",
+		"longDeskripsi": "Keyboard Mekanikal Gaming RGB dirancang khusus untuk para gamer yang menginginkan performa tinggi dan estetika menarik dalam satu paket. Dilengkapi dengan switch mekanikal berkualitas tinggi, keyboard ini menawarkan respons cepat dan taktil yang sangat dibutuhkan dalam permainan kompetitif. Setiap tombol dapat diprogram secara individual, memungkinkan Anda untuk menyesuaikan fungsi sesuai kebutuhan gaming Anda. Lampu latar RGB yang dapat diatur memberikan efek pencahayaan yang memukau, dengan berbagai mode dan warna yang bisa disesuaikan untuk menciptakan suasana gaming yang lebih seru. Desain ergonomis dengan penyangga pergelangan tangan memastikan kenyamanan selama sesi permainan yang panjang. Keyboard Mekanikal Gaming RGB adalah pilihan sempurna bagi gamer yang serius tentang performa dan gaya.",
 		"tags": ["keyboard", "gaming", "komputer", "rgb", "aksesoris pc"]
 	},
 	{
 		"id": 7,
 		"nama": "Set Teh Herbal Relaksasi",
 		"harga": 180000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"gambar": "https://images.unsplash.com/photo-1487029752771-6ce055c28820?q=80&w=1200&auto=format&fit=crop",
 		"kategori": "makanan & minuman",
 		"deskripsi": "Koleksi teh herbal premium berisi chamomile, peppermint, dan lavender. Membantu menenangkan pikiran dan meningkatkan kualitas tidur.",
+		"longDeskripsi": "Set Teh Herbal Relaksasi adalah pilihan sempurna bagi mereka yang mencari cara alami untuk menenangkan pikiran dan tubuh setelah hari yang panjang. Set ini terdiri dari tiga jenis teh herbal premium: chamomile, peppermint, dan lavender, masing-masing dipilih karena manfaat kesehatannya yang unik. Chamomile dikenal karena kemampuannya untuk meredakan stres dan membantu tidur nyenyak, sementara peppermint membantu pencernaan dan menyegarkan pikiran. Lavender, dengan aroma khasnya, memberikan efek relaksasi yang mendalam. Setiap kantong teh terbuat dari bahan organik berkualitas tinggi, tanpa tambahan bahan kimia atau pengawet, memastikan Anda mendapatkan manfaat maksimal dari setiap cangkir teh. Dengan Set Teh Herbal Relaksasi, Anda dapat menciptakan momen ketenangan di tengah kesibukan sehari-hari.",
 		"tags": ["teh", "herbal", "kesehatan", "relaksasi", "hadiah", "minuman"]
 	},
 	{
 		"id": 8,
 		"nama": "Kamera Mirrorless Alpha Z",
 		"harga": 8500000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"gambar": "https://images.unsplash.com/photo-1519183071298-a2962be96f83?q=80&w=1200&auto=format&fit=crop",
 		"kategori": "elektronik",
-		"deskripsi": "Kamera mirrorless entry-level dengan sensor APS-C 24MP. Mampu merekam video 4K dan dilengkapi dengan layar sentuh lipat. Sempurna untuk vlogging dan fotografi.",
+		"deskripsi": "Kamera mirrorless entry-level dengan sensor APS-C 24MP. Mampu merekam video 4K dan dilengkapi layar sentuh lipat.",
+		"longDeskripsi": "Kamera Mirrorless Alpha Z adalah pilihan ideal bagi fotografer pemula dan penggemar videografi yang menginginkan kualitas gambar profesional dalam bodi yang kompak dan ringan. Dilengkapi dengan sensor APS-C 24MP, kamera ini mampu menangkap detail yang tajam dan warna yang kaya, menghasilkan foto berkualitas tinggi dalam berbagai kondisi pencahayaan. Fitur perekaman video 4K memungkinkan Anda untuk membuat video dengan resolusi tinggi, sementara layar sentuh lipat memberikan fleksibilitas dalam pengambilan gambar dari berbagai sudut. Sistem autofokus cepat dan akurat memastikan subjek Anda selalu dalam fokus, bahkan saat bergerak. Dengan berbagai mode pemotretan dan filter kreatif, Kamera Mirrorless Alpha Z memungkinkan Anda untuk mengekspresikan kreativitas Anda tanpa batas. Baik untuk fotografi sehari-hari, perjalanan, atau proyek kreatif, kamera ini adalah alat yang sempurna untuk mengabadikan momen berharga Anda.",
 		"tags": ["kamera", "fotografi", "vlogging", "video", "elektronik", "hobi"]
 	},
 	{
 		"id": 9,
 		"nama": "Kursi Kantor Ergonomis FlexiChair",
 		"harga": 2200000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"gambar": "https://images.unsplash.com/photo-1582582494700-258ef2b7a593?q=80&w=1200&auto=format&fit=crop",
 		"kategori": "furnitur & rumah tangga",
-		"deskripsi": "Kursi kerja yang dirancang untuk kenyamanan maksimal dengan dukungan punggung yang bisa disesuaikan, sandaran tangan 4D, dan material jaring yang sejuk.",
+		"deskripsi": "Kursi kerja ergonomis dengan dukungan punggung yang bisa disesuaikan dan material jaring yang sejuk.",
+		"longDeskripsi": "Kursi Kantor Ergonomis FlexiChair dirancang untuk memberikan kenyamanan maksimal selama jam kerja yang panjang. Dengan fitur penyesuaian yang lengkap, termasuk ketinggian kursi, sudut sandaran, dan dukungan lumbar yang dapat diatur, kursi ini membantu mengurangi ketegangan pada punggung dan leher, mencegah rasa sakit akibat postur yang salah. Material jaring bernapas pada sandaran kursi memastikan sirkulasi udara yang baik, menjaga Anda tetap sejuk dan nyaman sepanjang hari. Desain modern dan minimalis dari FlexiChair membuatnya cocok untuk berbagai gaya dekorasi kantor atau ruang kerja di rumah. Dengan konstruksi yang kokoh dan bahan berkualitas tinggi, kursi ini tidak hanya menawarkan kenyamanan tetapi juga daya tahan jangka panjang. FlexiChair adalah investasi yang tepat untuk meningkatkan produktivitas dan kesejahteraan Anda di tempat kerja.",
 		"tags": ["kursi", "kantor", "ergonomis", "furnitur", "kerja", "kesehatan"]
 	},
 	{
 		"id": 10,
 		"nama": "Drone Quadcopter Mini SkyView",
 		"harga": 1250000,
-		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
+		"gambar": "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop",
 		"kategori": "hobi & mainan",
-		"deskripsi": "Drone lipat yang mudah dibawa dengan kamera 1080p. Cocok untuk pemula yang ingin belajar videografi udara. Waktu terbang hingga 15 menit.",
+		"deskripsi": "Drone lipat yang mudah dibawa dengan kamera 1080p. Cocok untuk pemula yang ingin belajar videografi udara.",
+		"longDeskripsi": "Drone Quadcopter Mini SkyView adalah pilihan sempurna bagi pemula yang ingin menjelajahi dunia videografi udara dengan cara yang mudah dan menyenangkan. Dengan desain lipat yang kompak, drone ini mudah dibawa ke mana saja, memungkinkan Anda untuk menangkap momen-momen menakjubkan dari perspektif yang unik. Dilengkapi dengan kamera 1080p, SkyView mampu merekam video berkualitas tinggi dan mengambil foto dengan detail yang tajam. Fitur-fitur seperti mode penerbangan otomatis, kontrol ketinggian, dan kemampuan untuk melakukan manuver seperti flip 360 derajat membuatnya mudah digunakan bahkan untuk mereka yang baru pertama kali menerbangkan drone. Baterai tahan lama memberikan waktu terbang hingga 15 menit, cukup untuk menangkap berbagai sudut pandang sebelum perlu diisi ulang. Dengan Drone Quadcopter Mini SkyView, Anda dapat mengabadikan petualangan Anda dari langit dengan cara yang seru dan kreatif.",
 		"tags": ["drone", "hobi", "fotografi", "video", "gadget", "mainan"]
 	},
 	{
@@ -96,6 +106,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "fashion & aksesoris",
 		"deskripsi": "Sepatu sneakers kasual dengan desain modern dan sol yang empuk. Nyaman digunakan untuk berjalan seharian di perkotaan.",
+		"longDeskripsi": "Sneakers Urban Explorer X1 adalah sepatu kasual yang dirancang untuk memberikan kenyamanan dan gaya dalam satu paket. Dengan desain modern yang trendi, sepatu ini cocok untuk berbagai kesempatan, mulai dari berjalan-jalan di kota hingga hangout bersama teman. Sol empuk yang terbuat dari bahan berkualitas tinggi memberikan bantalan optimal, mengurangi tekanan pada kaki saat berjalan atau berdiri dalam waktu lama. Bagian atas sepatu terbuat dari material breathable yang memastikan sirkulasi udara yang baik, menjaga kaki tetap sejuk dan kering sepanjang hari. Sneakers Urban Explorer X1 juga dilengkapi dengan tali yang kuat dan tahan lama, memastikan sepatu tetap pas di kaki Anda. Dengan berbagai pilihan warna yang stylish, sneakers ini adalah pilihan sempurna bagi mereka yang ingin tampil modis tanpa mengorbankan kenyamanan.",
 		"tags": ["sepatu", "sneakers", "fashion", "kasual", "pria", "wanita"]
 	},
 	{
@@ -105,6 +116,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "dapur & rumah tangga",
 		"deskripsi": "Botol minum stainless steel yang dapat menjaga suhu minuman panas atau dingin hingga 12 jam. Dilengkapi penutup dengan display suhu LED.",
+		"longDeskripsi": "Botol Minum Termos Cerdas HydroSmart adalah solusi sempurna untuk menjaga minuman Anda tetap pada suhu ideal sepanjang hari. Terbuat dari stainless steel berkualitas tinggi, botol ini mampu menjaga minuman panas tetap hangat hingga 12 jam dan minuman dingin tetap segar hingga 24 jam. Fitur cerdasnya termasuk penutup dengan display suhu LED yang menunjukkan suhu minuman di dalam botol, memungkinkan Anda untuk mengetahui kapan saatnya untuk menikmati minuman Anda. Desainnya yang ergonomis dan tahan bocor membuatnya mudah dibawa ke mana saja, baik untuk aktivitas olahraga, perjalanan, atau penggunaan sehari-hari. Dengan kapasitas 500ml, HydroSmart cukup besar untuk memenuhi kebutuhan hidrasi Anda tanpa terlalu berat untuk dibawa. Botol Minum Termos Cerdas HydroSmart adalah pilihan ideal bagi mereka yang menghargai kualitas, fungsionalitas, dan gaya dalam satu produk.",
 		"tags": ["termos", "botol minum", "olahraga", "travel", "kesehatan", "gadget"]
 	},
 	{
@@ -114,6 +126,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "buku",
 		"deskripsi": "Buku pengembangan diri terlaris di dunia yang mengajarkan cara membangun kebiasaan baik dan menghilangkan kebiasaan buruk melalui perubahan-perubahan kecil.",
+		"longDeskripsi": "Buku 'Atomic Habits' karya James Clear adalah panduan praktis yang mengajarkan bagaimana perubahan kecil dalam kebiasaan sehari-hari dapat menghasilkan hasil yang luar biasa dalam jangka panjang. Dengan pendekatan berbasis ilmu pengetahuan dan psikologi, buku ini menjelaskan konsep 'atomik' dalam kebiasaan, yaitu perubahan kecil yang konsisten yang dapat membawa dampak besar. James Clear membagikan strategi-strategi efektif untuk membangun kebiasaan baik, menghilangkan kebiasaan buruk, dan menciptakan sistem yang mendukung pertumbuhan pribadi. Buku ini juga dilengkapi dengan contoh nyata dan studi kasus yang menginspirasi, membuatnya mudah dipahami dan diterapkan dalam kehidupan sehari-hari. 'Atomic Habits' adalah bacaan wajib bagi siapa saja yang ingin meningkatkan kualitas hidupnya melalui perubahan positif yang berkelanjutan.",
 		"tags": ["buku", "pengembangan diri", "non-fiksi", "produktivitas", "kebiasaan"]
 	},
 	{
@@ -123,6 +136,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "rumah & taman",
 		"deskripsi": "Satu set berisi lima jenis sukulen yang berbeda dalam pot keramik mini. Perawatannya mudah dan cocok untuk menghias meja kerja atau ruangan.",
+		"longDeskripsi": "Set Tanaman Hias Sukulen ini terdiri dari lima jenis sukulen yang berbeda, masing-masing ditanam dalam pot keramik mini yang cantik. Sukulen dikenal karena kemampuannya untuk menyimpan air dalam daunnya, sehingga perawatannya sangat mudah dan tidak memerlukan penyiraman yang sering. Set ini sangat cocok untuk menghias meja kerja, rak buku, atau sudut ruangan lainnya, memberikan sentuhan hijau yang menyegarkan dan estetika alami pada lingkungan Anda. Selain itu, sukulen juga dikenal memiliki manfaat kesehatan, seperti meningkatkan kualitas udara dan memberikan efek menenangkan. Dengan berbagai bentuk dan warna daun yang unik, set tanaman hias sukulen ini adalah pilihan sempurna bagi pecinta tanaman maupun mereka yang baru mulai tertarik dengan dunia berkebun indoor.",
 		"tags": ["tanaman", "dekorasi", "rumah", "kantor", "hadiah", "hobi"]
 	},
 	{
@@ -132,6 +146,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "elektronik",
 		"deskripsi": "Lampu meja modern dengan tingkat kecerahan yang dapat disesuaikan dan fitur pengisian nirkabel untuk smartphone. Desain minimalis cocok untuk meja kerja atau belajar.",
+		"longDeskripsi": "Lampu Meja LED dengan Pengisian Nirkabel adalah solusi sempurna untuk menciptakan lingkungan kerja atau belajar yang nyaman dan efisien. Lampu ini dilengkapi dengan teknologi LED hemat energi yang memberikan pencahayaan yang cukup tanpa menguras daya listrik. Tingkat kecerahan dapat disesuaikan sesuai kebutuhan Anda, mulai dari cahaya lembut untuk suasana santai hingga cahaya terang untuk fokus maksimal saat bekerja atau belajar. Fitur pengisian nirkabel memungkinkan Anda untuk mengisi daya smartphone kompatibel hanya dengan meletakkannya di atas basis lampu, mengurangi kekacauan kabel di meja Anda. Desain minimalis dan modern dari lampu ini membuatnya cocok untuk berbagai gaya dekorasi, menambah sentuhan elegan pada ruang kerja atau belajar Anda. Dengan Lampu Meja LED dengan Pengisian Nirkabel, Anda dapat meningkatkan produktivitas dan kenyamanan dalam satu perangkat praktis.",
 		"tags": ["lampu", "meja", "led", "gadget", "kerja", "belajar"]
 	},
 	{
@@ -141,6 +156,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "kantor & alat tulis",
 		"deskripsi": "Set alat tulis lengkap dengan pena, pensil, penghapus, dan penggaris dalam kotak kayu elegan. Cocok untuk profesional atau sebagai hadiah.",
+		"longDeskripsi": "Set Alat Tulis Premium Executive adalah pilihan ideal bagi para profesional yang menghargai kualitas dan estetika dalam alat tulis mereka. Set ini terdiri dari berbagai perlengkapan tulis berkualitas tinggi, termasuk pena tinta gel halus, pensil mekanik presisi, penghapus lembut yang tidak merusak kertas, dan penggaris stainless steel yang tahan lama. Semua alat tulis ini disimpan dalam kotak kayu elegan dengan finishing halus, memberikan kesan mewah dan profesional. Set Alat Tulis Premium Executive tidak hanya praktis untuk digunakan sehari-hari di kantor atau saat rapat, tetapi juga membuat hadiah yang sempurna untuk rekan kerja, teman, atau keluarga yang menghargai alat tulis berkualitas. Dengan desain yang timeless dan fungsionalitas yang optimal, set ini akan menjadi tambahan berharga untuk meja kerja Anda.",
 		"tags": ["alat tulis", "pena", "kantor", "hadiah", "profesional", "eksekutif"]
 	},
 	{
@@ -150,6 +166,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "elektronik",
 		"deskripsi": "Speaker Bluetooth dengan suara jernih dan bass yang kuat. Tahan air dan baterai tahan hingga 10 jam, ideal untuk aktivitas outdoor.",
+		"longDeskripsi": "Speaker Bluetooth Portabel SoundWave adalah pilihan sempurna bagi mereka yang ingin menikmati musik berkualitas tinggi di mana saja. Dengan desain kompak dan ringan, speaker ini mudah dibawa ke berbagai aktivitas outdoor seperti piknik, berkemah, atau pesta di pantai. Dilengkapi dengan teknologi Bluetooth terbaru, SoundWave memungkinkan Anda untuk menghubungkan perangkat Anda secara nirkabel dalam jarak hingga 10 meter, memberikan kebebasan bergerak tanpa kabel yang mengganggu. Suara jernih dengan bass yang kuat memastikan pengalaman mendengarkan musik yang memuaskan, bahkan di lingkungan terbuka. Speaker ini juga tahan air dengan sertifikasi IPX7, sehingga Anda tidak perlu khawatir tentang percikan air atau hujan ringan. Baterai internal yang tahan lama memberikan waktu pemutaran hingga 10 jam, memungkinkan Anda menikmati musik sepanjang hari tanpa perlu sering mengisi ulang. Dengan Speaker Bluetooth Portabel SoundWave, Anda dapat membawa suasana pesta ke mana pun Anda pergi.",
 		"tags": ["speaker", "bluetooth", "musik", "outdoor", "gadget", "audio"]
 	},
 	{
@@ -159,6 +176,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "dapur & rumah tangga",
 		"deskripsi": "Set lengkap peralatan memasak dari stainless steel berkualitas tinggi, termasuk panci, wajan, spatula, dan sendok. Tahan lama dan mudah dibersihkan.",
+		"longDeskripsi": "Set Peralatan Memasak Stainless Steel adalah solusi lengkap untuk kebutuhan dapur Anda, dirancang untuk memberikan performa optimal dan daya tahan jangka panjang. Set ini terdiri dari berbagai peralatan memasak esensial, termasuk panci dengan tutup kaca yang memungkinkan Anda memantau proses memasak, wajan anti lengket yang ideal untuk menggoreng dan menumis, serta spatula dan sendok yang ergonomis dan nyaman digunakan. Terbuat dari stainless steel berkualitas tinggi, peralatan ini tidak hanya tahan lama tetapi juga mudah dibersihkan, baik dengan tangan maupun di mesin pencuci piring. Desainnya yang modern dan elegan membuat set ini cocok untuk berbagai gaya dapur, menambah sentuhan profesional pada ruang memasak Anda. Dengan Set Peralatan Memasak Stainless Steel, Anda dapat memasak dengan percaya diri dan menikmati hasil masakan yang lezat setiap saat.",
 		"tags": ["dapur", "memasak", "peralatan", "stainless steel", "rumah tangga"]
 	},
 	{
@@ -168,6 +186,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "fashion & aksesoris",
 		"deskripsi": "Tas selempang dari kulit asli dengan desain vintage yang elegan. Cocok untuk pria dan wanita, memberikan sentuhan klasik pada penampilan sehari-hari.",
+		"longDeskripsi": "Tas Selempang Kulit Asli Vintage adalah aksesori fashion yang menggabungkan keindahan klasik dengan fungsionalitas modern. Terbuat dari kulit asli berkualitas tinggi, tas ini menawarkan daya tahan yang luar biasa serta tampilan yang elegan dan timeless. Desain vintage-nya menampilkan detail jahitan yang rapi dan aksen logam yang menambah karakter pada tas, menjadikannya pilihan sempurna untuk melengkapi berbagai gaya berpakaian, baik casual maupun semi-formal. Dengan kompartemen yang cukup luas dan beberapa kantong tambahan, tas ini memungkinkan Anda untuk menyimpan barang-barang penting seperti dompet, ponsel, kunci, dan lainnya dengan rapi dan mudah diakses. Tali selempang yang dapat disesuaikan memberikan kenyamanan maksimal saat digunakan, membuatnya ideal untuk aktivitas sehari-hari, perjalanan, atau acara khusus. Tas Selempang Kulit Asli Vintage adalah investasi gaya yang akan bertahan lama dan selalu terlihat modis.",
 		"tags": ["tas", "selempang", "kulit", "fashion", "vintage", "aksesoris"]
 	},
 	{
@@ -177,6 +196,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "elektronik",
 		"deskripsi": "Kamera aksi tahan air dengan resolusi 4K Ultra HD, cocok untuk merekam petualangan outdoor seperti bersepeda, menyelam, atau hiking. Dilengkapi dengan berbagai aksesori.",
+		"longDeskripsi": "Kamera Aksi 4K Ultra HD adalah perangkat ideal bagi para petualang dan penggemar olahraga ekstrem yang ingin mengabadikan momen-momen seru dalam kualitas video yang luar biasa. Dengan kemampuan merekam video dalam resolusi 4K Ultra HD, kamera ini menangkap detail yang tajam dan warna yang hidup, memberikan hasil rekaman yang memukau. Desainnya yang tahan air hingga kedalaman tertentu memungkinkan Anda untuk merekam aktivitas di bawah air, seperti menyelam atau snorkeling, tanpa khawatir akan kerusakan. Kamera ini juga dilengkapi dengan berbagai aksesori praktis, termasuk mount untuk helm, sepeda, dan tripod, sehingga Anda dapat memasangnya di berbagai permukaan untuk mendapatkan sudut pandang yang unik. Fitur-fitur tambahan seperti stabilisasi gambar elektronik, mode slow motion, dan konektivitas Wi-Fi memungkinkan Anda untuk mengedit dan membagikan video dengan mudah. Dengan Kamera Aksi 4K Ultra HD, Anda dapat menjelajahi dunia dan mengabadikan petualangan Anda dengan cara yang paling epik.",
 		"tags": ["kamera aksi", "4k", "outdoor", "petualangan", "gadget", "video"]
 	},
 	{
@@ -186,6 +206,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "rumah & taman",
 		"deskripsi": "Set alat berkebun lengkap dengan sekop, garpu, sarung tangan, dan penyiram. Cocok untuk pemula yang ingin memulai hobi berkebun di rumah.",
+		"longDeskripsi": "Set Alat Berkebun untuk Pemula adalah paket lengkap yang dirancang untuk membantu Anda memulai hobi berkebun dengan mudah dan menyenangkan. Set ini mencakup berbagai alat esensial yang diperlukan untuk merawat tanaman, termasuk sekop kecil untuk menggali tanah, garpu taman untuk mengolah tanah, sarung tangan berkualitas tinggi yang melindungi tangan Anda dari kotoran dan duri, serta penyiram yang praktis untuk menyiram tanaman dengan efisien. Semua alat dalam set ini terbuat dari bahan yang tahan lama dan dirancang ergonomis untuk memberikan kenyamanan saat digunakan. Dengan Set Alat Berkebun untuk Pemula, Anda dapat menanam bunga, sayuran, atau tanaman hias di halaman rumah atau balkon, menciptakan ruang hijau yang indah dan menenangkan. Hobi berkebun tidak hanya menyenangkan tetapi juga bermanfaat bagi kesehatan mental dan fisik Anda. Mulailah perjalanan berkebun Anda dengan alat-alat yang tepat dan nikmati proses menumbuhkan kehidupan baru di sekitar Anda.",
 		"tags": ["berkebun", "alat", "taman", "hobi", "rumah", "pemula"]
 	},
 	{
@@ -195,6 +216,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "fashion & aksesoris",
 		"deskripsi": "Kacamata hitam dengan lensa polarized yang melindungi mata dari sinar UV. Desain trendy cocok untuk berbagai aktivitas outdoor.",
+		"longDeskripsi": "Kacamata Hitam Polarized Trendy adalah aksesori fashion yang tidak hanya menambah gaya tetapi juga memberikan perlindungan optimal bagi mata Anda. Dilengkapi dengan lensa polarized berkualitas tinggi, kacamata ini mampu mengurangi silau dari permukaan reflektif seperti air, jalan raya, dan salju, sehingga meningkatkan kenyamanan visual dan mengurangi ketegangan mata saat berada di luar ruangan. Selain itu, lensa ini juga menawarkan perlindungan 100% terhadap sinar UVA dan UVB, menjaga kesehatan mata Anda dari bahaya radiasi ultraviolet. Desainnya yang trendy dengan frame yang ringan dan nyaman membuat kacamata ini cocok untuk berbagai aktivitas outdoor, mulai dari berkendara, bersepeda, hingga bersantai di pantai. Dengan berbagai pilihan warna lensa dan frame yang stylish, Kacamata Hitam Polarized Trendy adalah pilihan sempurna bagi mereka yang ingin tampil modis sambil melindungi mata mereka.",
 		"tags": ["kacamata", "hitam", "polarized", "fashion", "outdoor", "aksesoris"]
 	},
 	{
@@ -204,6 +226,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "dapur & rumah tangga",
 		"deskripsi": "Bantal leher ergonomis dari memory foam yang memberikan dukungan optimal saat bepergian. Ringan dan mudah dibawa, cocok untuk perjalanan jauh.",
+		"longDeskripsi": "Bantal Leher Memory Foam TravelMate adalah solusi sempurna untuk meningkatkan kenyamanan Anda selama perjalanan jauh, baik dengan pesawat, kereta, atau mobil. Terbuat dari memory foam berkualitas tinggi, bantal ini dirancang untuk menyesuaikan bentuk leher dan kepala Anda, memberikan dukungan optimal yang membantu mengurangi ketegangan otot dan mencegah rasa sakit leher. Desain ergonomisnya memastikan bahwa bantal tetap pada posisinya, bahkan saat Anda bergerak, sehingga Anda dapat tidur atau bersantai dengan lebih nyaman. TravelMate juga ringan dan mudah dibawa, dilengkapi dengan kantong penyimpanan yang praktis untuk memudahkan transportasi. Dengan penutup yang dapat dilepas dan dicuci, bantal ini mudah dirawat dan selalu siap digunakan. Bantal Leher Memory Foam TravelMate adalah teman perjalanan ideal yang akan membuat setiap perjalanan menjadi lebih menyenangkan dan bebas dari ketidaknyamanan.",
 		"tags": ["bantal leher", "travel", "memory foam", "perjalanan", "nyaman", "gadget"]
 	},
 	{
@@ -213,6 +236,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "kecantikan & perawatan diri",
 		"deskripsi": "Set perawatan kulit lengkap dengan pembersih wajah, toner, serum, dan pelembap berbahan alami. Cocok untuk semua jenis kulit.",
+		"longDeskripsi": "Set Perawatan Kulit Alami GlowUp adalah rangkaian produk yang dirancang untuk memberikan perawatan menyeluruh bagi kulit Anda dengan bahan-bahan alami yang lembut namun efektif. Set ini mencakup pembersih wajah yang membersihkan kotoran dan minyak tanpa menghilangkan kelembapan alami kulit, toner yang menyegarkan dan menyeimbangkan pH kulit, serum yang kaya akan antioksidan untuk melawan tanda-tanda penuaan, serta pelembap yang memberikan hidrasi intensif dan melindungi kulit dari faktor lingkungan. Semua produk dalam set ini diformulasikan tanpa bahan kimia keras, paraben, atau sulfat, menjadikannya aman untuk semua jenis kulit, termasuk kulit sensitif. Dengan penggunaan rutin, Set Perawatan Kulit Alami GlowUp membantu meningkatkan tekstur kulit, mencerahkan warna kulit, dan memberikan kilau sehat yang alami. Jadikan perawatan kulit Anda lebih mudah dan efektif dengan GlowUp, dan rasakan perubahan positif pada kulit Anda setiap hari.",
 		"tags": ["perawatan kulit", "alami", "kecantikan", "serum", "pelembap", "toner"]
 	},
 	{
@@ -222,6 +246,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "furnitur & rumah tangga",
 		"deskripsi": "Jam dinding dengan desain minimalis dan modern, cocok untuk menghias ruang tamu atau kantor. Baterai tahan lama dan mudah dipasang.",
+		"longDeskripsi": "Jam Dinding Minimalis Modern adalah aksesori dekoratif yang sempurna untuk menambah sentuhan elegan dan fungsional pada ruang tamu, kantor, atau ruang kerja Anda. Dengan desain yang sederhana namun stylish, jam ini mudah dipadukan dengan berbagai gaya dekorasi interior, dari yang klasik hingga kontemporer. Terbuat dari bahan berkualitas tinggi, jam dinding ini memiliki permukaan yang halus dan angka yang jelas, memudahkan Anda untuk membaca waktu dari jarak jauh. Mekanisme kuarsa yang presisi memastikan ketepatan waktu, sementara baterai tahan lama memungkinkan penggunaan tanpa perlu sering mengganti baterai. Pemasangan jam ini sangat mudah dengan gantungan di bagian belakang, sehingga Anda dapat segera menambahkan elemen fungsional dan estetis ke dinding Anda. Jam Dinding Minimalis Modern adalah pilihan ideal bagi mereka yang menghargai desain yang bersih dan efisien dalam kehidupan sehari-hari.",
 		"tags": ["jam dinding", "minimalis", "modern", "dekorasi", "rumah", "kantor"]
 	},
 	{
@@ -231,6 +256,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "hobi & mainan",
 		"deskripsi": "Set lengkap alat lukis untuk seniman, termasuk cat akrilik, kuas berbagai ukuran, palet, dan kanvas. Cocok untuk pemula hingga profesional.",
+		"longDeskripsi": "Set Alat Lukis Profesional adalah paket lengkap yang dirancang untuk memenuhi kebutuhan seniman dari berbagai tingkat keahlian, mulai dari pemula hingga profesional. Set ini mencakup cat akrilik berkualitas tinggi dalam berbagai warna cerah yang mudah dicampur dan diaplikasikan, memberikan hasil akhir yang halus dan tahan lama. Berbagai ukuran kuas disertakan untuk memungkinkan teknik melukis yang beragam, mulai dari detail halus hingga sapuan kuas yang lebih besar. Palet cat yang praktis memudahkan Anda untuk mencampur warna sesuai keinginan, sementara kanvas berkualitas tinggi memberikan permukaan ideal untuk mengekspresikan kreativitas Anda. Semua alat dalam set ini disimpan dalam kotak penyimpanan yang rapi dan mudah dibawa, memungkinkan Anda untuk melukis di mana saja. Dengan Set Alat Lukis Profesional, Anda dapat mengembangkan bakat seni Anda dan menciptakan karya-karya indah yang mencerminkan imajinasi dan ekspresi pribadi Anda.",
 		"tags": ["alat lukis", "cat akrilik", "hobi", "seni", "kanvas", "profesional"]
 	},
 	{
@@ -240,6 +266,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "olahraga & outdoor",
 		"deskripsi": "Sepeda lipat ringan dengan rangka aluminium, cocok untuk berkeliling kota. Mudah dilipat dan dibawa, serta dilengkapi dengan sistem pengereman yang aman.",
+		"longDeskripsi": "Sepeda Lipat Urban Cruiser adalah solusi ideal bagi mereka yang mencari cara praktis dan efisien untuk berkeliling kota. Dengan rangka aluminium yang ringan namun kuat, sepeda ini mudah dilipat dan dibawa ke mana saja, menjadikannya pilihan sempurna untuk perjalanan harian, komuter, atau petualangan akhir pekan. Desainnya yang kompak memungkinkan Anda untuk menyimpan sepeda ini di ruang terbatas, seperti di bawah meja kerja atau di dalam bagasi mobil. Sistem pengereman yang responsif dan aman memastikan kontrol penuh saat berkendara di berbagai kondisi jalan. Dilengkapi dengan roda yang tahan lama dan nyaman, Urban Cruiser memberikan pengalaman berkendara yang halus dan menyenangkan. Dengan berbagai pilihan warna yang stylish, Sepeda Lipat Urban Cruiser tidak hanya fungsional tetapi juga menambah gaya pada penampilan Anda. Jadikan perjalanan Anda lebih hijau dan sehat dengan sepeda lipat yang praktis ini.",
 		"tags": ["sepeda", "lipat", "olahraga", "outdoor", "transportasi", "gadget"]
 	},
 	{
@@ -249,6 +276,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "kesehatan & kebugaran",
 		"deskripsi": "Paket lengkap perlengkapan yoga termasuk matras anti slip, blok yoga, tali peregangan, dan tas pembawa. Cocok untuk pemula dan praktisi yoga berpengalaman.",
+		"longDeskripsi": "Paket Perlengkapan Yoga Lengkap adalah solusi sempurna bagi siapa saja yang ingin memulai atau meningkatkan praktik yoga mereka. Paket ini mencakup matras yoga anti slip yang memberikan stabilitas dan kenyamanan saat melakukan berbagai pose, blok yoga yang membantu dalam mencapai postur yang benar, tali peregangan untuk meningkatkan fleksibilitas, serta tas pembawa yang praktis untuk menyimpan dan mengangkut semua perlengkapan Anda dengan mudah. Semua item dalam paket ini terbuat dari bahan berkualitas tinggi yang tahan lama dan ramah lingkungan, memastikan pengalaman yoga yang aman dan menyenangkan. Baik Anda seorang pemula yang baru mengenal yoga atau seorang praktisi berpengalaman yang ingin memperdalam latihan Anda, Paket Perlengkapan Yoga Lengkap ini adalah investasi yang tepat untuk mendukung perjalanan kebugaran dan kesejahteraan Anda.",
 		"tags": ["yoga", "kebugaran", "kesehatan", "matras", "alat yoga", "hobi"]
 	},
 	{
@@ -258,6 +286,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "elektronik",
 		"deskripsi": "Casing pelindung untuk smartphone dengan desain slim namun tahan banting. Dilengkapi dengan pelindung layar anti gores.",
+		"longDeskripsi": "Casing Smartphone Anti Gores dan Tahan Banting adalah aksesori penting untuk melindungi perangkat Anda dari benturan, goresan, dan kerusakan sehari-hari. Dirancang dengan bahan berkualitas tinggi yang ringan namun kuat, casing ini memberikan perlindungan maksimal tanpa menambah beban berlebih pada smartphone Anda. Desainnya yang slim memastikan bahwa casing ini tidak mengganggu estetika asli ponsel Anda, sementara tekstur permukaannya memberikan pegangan yang nyaman dan mencegah tergelincir dari tangan. Selain itu, casing ini dilengkapi dengan pelindung layar anti gores yang menjaga layar ponsel tetap jernih dan bebas dari bekas sidik jari atau goresan. Dengan pemasangan yang mudah dan akses penuh ke semua tombol serta port, Casing Smartphone Anti Gores dan Tahan Banting adalah pilihan ideal bagi siapa saja yang ingin menjaga smartphone mereka tetap aman dan terlihat seperti baru.",
 		"tags": ["casing", "smartphone", "pelindung", "gadget", "anti gores", "tahan banting"]
 	},
 	{
@@ -267,6 +296,7 @@
 		"gambar": "https://images.unsplash.com/photo-1505740420928-5e590391c5af?q=80&w=2070",
 		"kategori": "hobi & mainan",
 		"deskripsi": "Set alat musik ukulele lengkap dengan ukulele ukuran standar, tuner, strap, dan buku panduan belajar. Cocok untuk pemula yang ingin belajar bermain ukulele.",
+		"longDeskripsi": "Set Alat Musik Ukulele Beginner adalah paket lengkap yang dirancang khusus untuk pemula yang ingin memulai perjalanan mereka dalam dunia musik. Set ini mencakup ukulele ukuran standar yang terbuat dari kayu berkualitas tinggi, memberikan suara yang jernih dan resonan. Dilengkapi dengan tuner digital yang memudahkan Anda untuk menyetel ukulele dengan tepat, serta strap yang nyaman untuk digunakan saat bermain. Buku panduan belajar yang disertakan memberikan instruksi langkah demi langkah, mulai dari dasar-dasar bermain ukulele hingga teknik-teknik lanjutan, sehingga Anda dapat belajar dengan mudah dan cepat. Dengan desain yang menarik dan ukuran yang pas untuk tangan, ukulele ini sangat cocok untuk semua usia. Set Alat Musik Ukulele Beginner adalah pilihan ideal bagi siapa saja yang ingin mengeksplorasi bakat musik mereka dan menikmati kesenangan bermain alat musik.",
 		"tags": ["ukulele", "musik", "alat musik", "hobi", "belajar", "pemula"]
 	}
 ]
