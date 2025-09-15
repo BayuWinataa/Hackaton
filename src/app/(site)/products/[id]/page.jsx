@@ -115,7 +115,7 @@ export default function ProductDetail({ params }) {
 						{product.longDeskripsi && (
 							<Card className="border-0 ring-1 ring-black/5">
 								<CardContent className="p-5">
-									<h3 className="text-base font-semibold text-slate-900">Detail & Ulasan Produk</h3>
+									<h3 className="text-base font-semibold text-slate-900">Detail Produk</h3>
 									<Separator className="my-4" />
 									<div className="prose prose-slate max-w-none">
 										<p className="leading-relaxed whitespace-pre-line">{product.longDeskripsi}</p>

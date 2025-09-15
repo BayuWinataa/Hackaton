@@ -21,7 +21,7 @@ export default function ChatPage() {
 	const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const [recommendedProducts, setRecommendedProducts] = useState(products);
+	const [recommendedProducts, setRecommendedProducts] = useState([]);
 	const [comparisonList, setComparisonList] = useState([]);
 	const [isComparing, setIsComparing] = useState(false);
 	const [comparisonResult, setComparisonResult] = useState('');
@@ -62,7 +62,7 @@ export default function ChatPage() {
 					});
 					const data = await res.json();
 					if (!res.ok) throw new Error(data.error || 'Unknown error');
-					setMessages((p) => [...p, { role: 'assistant', content: data.reply }]);
+					setMessages((p) => [...p, { role: 'assistant', content: data.reply, meta: { ids: data.ids || [] } }]);
 				} catch (e) {
 					setMessages((p) => [...p, { role: 'assistant', content: `Error: ${e.message}` }]);
 				} finally {
@@ -75,19 +75,26 @@ export default function ChatPage() {
 	useEffect(() => {
 		if (messages.length === 0) return;
 		localStorage.setItem('chat_messages', JSON.stringify(messages));
-
 		const last = messages[messages.length - 1];
-		if (last?.role === 'assistant') {
-			const ids = last.content.match(/\[ID:(\d+)\]/g) || [];
-			if (ids.length) {
-				const productIds = ids.map((s) => parseInt(s.match(/\d+/)[0]));
-				const found = productIds.map((id) => products.find((p) => p.id === id)).filter(Boolean);
-				setRecommendedProducts(found.length ? found : products);
-			} else {
-				setRecommendedProducts(products);
-			}
+		if (last?.role !== 'assistant') return;
+		let productIds = Array.isArray(last?.meta?.ids) ? last.meta.ids.filter((x) => Number.isFinite(x)) : [];
+		if (!productIds.length && typeof last.content === 'string') {
+			const matches = Array.from(last.content.matchAll(/\[ID:(\d+)\]/g));
+			productIds = matches.map((m) => parseInt(m[1], 10)).filter((n) => Number.isFinite(n));
 		}
-	}, [messages]);
+
+		// 3) Deduplicate sambil mempertahankan urutan
+		const seen = new Set();
+		productIds = productIds.filter((id) => (seen.has(id) ? false : (seen.add(id), true)));
+
+		// 4) Map ke produk; jika tidak ada ID → kosongkan rekomendasi
+		if (productIds.length) {
+			const found = productIds.map((id) => products.find((p) => p.id === id)).filter(Boolean);
+			setRecommendedProducts(found);
+		} else {
+			setRecommendedProducts([]);
+		}
+	}, [messages, products]);
 
 	useEffect(() => {
 		chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -156,7 +163,7 @@ export default function ChatPage() {
 			});
 			const data = await res.json();
 			if (!res.ok) throw new Error(data.error || 'Unknown error');
-			setMessages((p) => [...p, { role: 'assistant', content: data.reply }]);
+			setMessages((p) => [...p, { role: 'assistant', content: data.reply, meta: { ids: data.ids || [] } }]);
 		} catch (e) {
 			setMessages((p) => [...p, { role: 'assistant', content: `Error: ${e.message}` }]);
 		} finally {
@@ -272,7 +279,7 @@ export default function ChatPage() {
 									</div>
 								)}
 
-								{messages.length === 0 && !isLoading && <EmptyState title="Mulai percakapan" description="Minta rekomendasi, bandingkan 2 produk, atau tempel spesifikasi—AI bantu merangkum." icon={<ArrowRight className="h-4 w-4" />} />}
+								{messages.length === 0 && !isLoading && <EmptyState title="Mulai percakapan" description="Minta rekomendasi, saran budget, atau tempel spesifikasi—AI bantu merangkum." icon={<ArrowRight className="h-4 w-4" />} />}
 
 								<div ref={chatEndRef} />
 							</div>
@@ -377,7 +384,7 @@ function RecList({ items, formatIDR, isSelectedForCompare, toggleCompare }) {
 		<div className="space-y-3">
 			{items.map((product, idx) => (
 				<div key={`${product.id}-${product.nama}-${idx}`} className="group flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 transition-all hover:border-slate-300 hover:shadow-sm">
-					<Image src={gambar} alt={product.nama} width={64} height={64} className="h-16 w-16 rounded-lg object-cover" />
+					<Image src={product.gambar} alt={product.nama} width={64} height={64} className="h-16 w-16 rounded-lg object-cover" />
 					<div className="min-w-0 flex-1">
 						<p className="truncate font-medium">{product.nama}</p>
 						<p className="font-semibold text-blue-600">{formatIDR(product.harga)}</p>

@@ -32,7 +32,7 @@ export default function CartSheet() {
 					<SheetTitle>Keranjang</SheetTitle>
 				</SheetHeader>
 
-				<div className="mt-4 space-y-4">
+				<div className="mt-4 space-y-4 mx-4">
 					{items.length === 0 ? (
 						<p className="text-sm text-muted-foreground">Keranjang masih kosong.</p>
 					) : (
@@ -64,7 +64,7 @@ export default function CartSheet() {
 
 				<Separator className="my-4" />
 
-				<div className="flex items-center justify-between text-sm">
+				<div className="flex items-center justify-between text-sm mx-4 ">
 					<span className="text-muted-foreground">Subtotal</span>
 					<span className="font-semibold">{formatIDR(totalPrice)}</span>
 				</div>

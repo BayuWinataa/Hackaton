@@ -5,7 +5,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useCart } from './CartProvider';
 
-export default function AddToCartButton({ product, className }) {
+export default function AddToCartButton({ product }) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const search = useSearchParams();
@@ -39,7 +39,6 @@ export default function AddToCartButton({ product, className }) {
 	}, []);
 
 	const handleClick = () => {
-		// Rakitan URL tujuan setelah login (kembali ke halaman sekarang)
 		const nextUrl = pathname + (search?.toString() ? `?${search.toString()}` : '');
 
 		if (!isLoggedIn) {
@@ -59,12 +58,8 @@ export default function AddToCartButton({ product, className }) {
 	};
 
 	return (
-		<Button
-			className={className}
-			disabled={checking} // sementara disable ketika cek sesi
-			onClick={handleClick}
-		>
-			{checking ? 'Memeriksa…' : 'Tambah ke Keranjang'}
+		<Button className={checking ? 'cursor-not-allowed ' : ''} disabled={checking} onClick={handleClick}>
+			Tambah ke Keranjang
 		</Button>
 	);
 }

@@ -76,7 +76,7 @@ export default function Products() {
 								<h1 className="text-4xl md:text-5xl font-black leading-tight tracking-tight">
 									Belanja <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-fuchsia-600 bg-clip-text text-transparent">lebih smart</span> dengan AI
 								</h1>
-								<p className="mt-4 text-slate-600 text-lg">Filter cepat, rekomendasi pintar, dan detail produk yang rapi. Kamu fokus pilih yang cocok—AI bantu sisanya.</p>
+								<p className="mt-4 text-slate-600 text-lg">Filter cepat, rekomendasi pintar, dan detail produk yang rapi. Kamu fokus pilih yang cocok, AI bantu sisanya.</p>
 								<div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
 									<Button asChild size="lg" className="font-semibold">
 										<Link href="/chat" className="inline-flex items-center gap-2">
@@ -219,7 +219,7 @@ export default function Products() {
 						{filtered.map((product, idx) => {
 							const img = product.gambar || product.image || fallbackImg;
 							const showTags = (product.tags || []).slice(0, 2);
-							const isNew = idx < 4; // sekadar UX: 4 kartu pertama diberi highlight
+							
 
 							return (
 								<Link
@@ -244,7 +244,6 @@ export default function Products() {
 										{/* Chip kategori / new */}
 										<div className="absolute left-3 top-3 flex items-center gap-2">
 											{product.kategori && <span className="rounded-full bg-white/85 px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/10 backdrop-blur capitalize">{product.kategori}</span>}
-											{isNew && <span className="rounded-full bg-blue-600/90 px-2 py-1 text-[10px] font-bold text-white shadow">Baru</span>}
 										</div>
 									</div>
 
@@ -265,7 +264,6 @@ export default function Products() {
 
 										<div className="mt-3 flex items-center justify-between">
 											<span className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-1.5 text-sm font-extrabold text-white shadow-sm">{formatIDR(product.harga)}</span>
-											<span className="text-xs text-slate-500">ID #{product.id}</span>
 										</div>
 									</div>
 								</Link>
