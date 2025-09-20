@@ -1,7 +1,13 @@
 // src/app/register/page.jsx
 'use client';
+
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function RegisterPage() {
 	const router = useRouter();
@@ -25,7 +31,7 @@ export default function RegisterPage() {
 			const data = await res.json();
 			if (!res.ok) throw new Error(data.error || 'Register gagal');
 
-			// ✅ Setelah register, minta user login dulu
+			// ✅ setelah register, redirect ke login
 			router.replace(`/login?next=${encodeURIComponent(next)}&email=${encodeURIComponent(form.email)}`);
 		} catch (e) {
 			setErr(e.message);
@@ -35,23 +41,47 @@ export default function RegisterPage() {
 	};
 
 	return (
-		<div className="max-w-sm mx-auto p-6">
-			<h1 className="text-2xl font-bold">Daftar</h1>
-			<form onSubmit={submit} className="mt-4 space-y-3">
-				<input className="w-full border rounded px-3 py-2" placeholder="Nama (opsional)" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
-				<input className="w-full border rounded px-3 py-2" placeholder="Email" type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
-				<input className="w-full border rounded px-3 py-2" placeholder="Password" type="password" value={form.password} onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))} />
-				{err && <div className="text-sm text-red-600">{err}</div>}
-				<button disabled={loading} className="w-full bg-blue-600 text-white rounded py-2">
-					{loading ? 'Memproses…' : 'Daftar'}
-				</button>
-				<p className="text-sm mt-2">
-					Sudah punya akun?{' '}
-					<a href={`/login?next=${encodeURIComponent(next)}`} className="underline">
-						Masuk
-					</a>
-				</p>
-			</form>
+		<div className="flex min-h-screen w-full items-center justify-center bg-muted/30 px-4">
+			<Card className="w-full max-w-md shadow-lg">
+				<CardHeader>
+					<CardTitle className="text-center text-2xl font-bold">Daftar Akun</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<form onSubmit={submit} className="space-y-4">
+						<div className="space-y-1">
+							<Label htmlFor="name">Nama</Label>
+							<Input id="name" placeholder="Nama" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+						</div>
+
+						<div className="space-y-1">
+							<Label htmlFor="email">Email</Label>
+							<Input id="email" type="email" placeholder="email@contoh.com" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
+						</div>
+
+						<div className="space-y-1">
+							<Label htmlFor="password">Password</Label>
+							<Input id="password" type="password" placeholder="********" value={form.password} onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))} />
+						</div>
+
+						{err && (
+							<Alert variant="destructive">
+								<AlertDescription>{err}</AlertDescription>
+							</Alert>
+						)}
+
+						<Button type="submit" className="w-full" disabled={loading}>
+							{loading ? 'Memproses…' : 'Daftar'}
+						</Button>
+
+						<p className="text-center text-sm text-muted-foreground">
+							Sudah punya akun?{' '}
+							<a href={`/login?next=${encodeURIComponent(next)}`} className="underline underline-offset-4 hover:text-primary">
+								Masuk
+							</a>
+						</p>
+					</form>
+				</CardContent>
+			</Card>
 		</div>
 	);
 }

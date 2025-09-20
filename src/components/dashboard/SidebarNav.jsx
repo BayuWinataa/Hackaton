@@ -8,10 +8,10 @@ import { LayoutDashboard, ShoppingBag, Receipt, MessageSquare, Settings, User } 
 const LINKS = [
 	{ href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
 	{ href: '/dashboard/orders', label: 'Orders', icon: ShoppingBag },
-	{ href: '/dashboard/invoices', label: 'Invoices', icon: Receipt },
-	{ href: '/dashboard/chat-history', label: 'Chat History', icon: MessageSquare },
-	{ href: '/dashboard/profile', label: 'Profile', icon: User },
-	{ href: '/dashboard/settings', label: 'Settings', icon: Settings },
+	// { href: '/dashboard/invoices', label: 'Invoices', icon: Receipt },
+	// { href: '/dashboard/chat-history', label: 'Chat History', icon: MessageSquare },
+	// { href: '/dashboard/profile', label: 'Profile', icon: User },
+	// { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ];
 
 export default function SidebarNav({ mobile = false }) {

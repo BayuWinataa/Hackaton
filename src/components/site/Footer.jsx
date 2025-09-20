@@ -77,13 +77,6 @@ export default function Footer() {
 						</ul>
 					</div>
 				</div>
-
-				{/* Bottom */}
-				<div className="mt-10 border-t pt-6 text-center text-xs text-slate-500">
-					<p>
-						© {new Date().getFullYear()} <span className="font-semibold text-slate-700">ShopMate AI</span>. Semua hak dilindungi.
-					</p>
-				</div>
 			</div>
 		</footer>
 	);

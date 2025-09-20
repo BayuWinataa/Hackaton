@@ -1,3 +1,129 @@
+// 'use client';
+
+// import React, { useEffect, useRef, useState } from 'react';
+
+// // Versi JSX murni (tanpa TypeScript). Chat UI mirip ChatGPT.
+// // Gunakan TailwindCSS untuk styling.
+
+// function ChatGPTLikeChat() {
+// 	const [messages, setMessages] = useState([{ role: 'assistant', content: 'Hai! Aku asistenmu. Tanyakan apa saja 😊' }]);
+// 	const [input, setInput] = useState('');
+// 	const viewportRef = useRef(null);
+
+// 	useEffect(() => {
+// 		if (!viewportRef.current) return;
+// 		viewportRef.current.scrollTop = viewportRef.current.scrollHeight;
+// 	}, [messages.length]);
+
+// 	function handleSend(e) {
+// 		e.preventDefault();
+// 		const text = input.trim();
+// 		if (!text) return;
+
+// 		setMessages((prev) => [...prev, { role: 'user', content: text }]);
+// 		setInput('');
+
+// 		setTimeout(() => {
+// 			setMessages((prev) => [...prev, { role: 'assistant', content: `Kamu berkata: ${text}` }]);
+// 		}, 400);
+// 	}
+
+// 	return (
+// 		<div className="h-[100dvh] bg-slate-50">
+
+// 			{/* Content area */}
+// 			<main className="mx-auto h-[calc(100dvh-4rem)] max-w-5xl px-4 py-4">
+// 				<div className="grid h-full min-h-0 grid-cols-1 gap-4 md:grid-cols-[260px_1fr]">
+// 					{/* Sidebar */}
+// 					<aside className="hidden min-h-0 md:flex">
+// 						<div className="flex w-full flex-col rounded-2xl border bg-white p-3 shadow-sm">
+// 							<div className="mb-2 text-sm font-semibold">Percakapan</div>
+// 							<div className="min-h-0 flex-1 overflow-y-auto pr-1">
+// 								<ul className="space-y-2 text-sm text-slate-600">
+// 									<li className="truncate rounded-lg border px-3 py-2 hover:bg-slate-50">Sesi 1</li>
+// 									<li className="truncate rounded-lg border px-3 py-2 hover:bg-slate-50">Sesi 2</li>
+// 									<li className="truncate rounded-lg border px-3 py-2 hover:bg-slate-50">Sesi 3</li>
+// 								</ul>
+// 							</div>
+// 							<button className="mt-3 rounded-xl bg-slate-900 px-4 py-2 text-sm text-white hover:bg-black">Obrolan Baru</button>
+// 						</div>
+// 					</aside>
+
+// 					{/* Chat pane */}
+// 					<section className="flex min-h-0 flex-col overflow-hidden rounded-2xl border bg-white shadow-sm ring-1 ring-slate-200">
+// 						{/* Messages viewport */}
+// 						<div ref={viewportRef} className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-6">
+// 							<div className="mx-auto flex max-w-2xl flex-col gap-4">
+// 								{messages.map((m, i) => (
+// 									<MessageBubble key={i} role={m.role} content={m.content} />
+// 								))}
+// 							</div>
+// 						</div>
+
+// 						{/* Composer */}
+// 						<div className="border-t border-slate-200 p-3">
+// 							<form onSubmit={handleSend} className="mx-auto flex max-w-2xl items-end gap-2">
+// 								<Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ketik pesan Anda..." className="flex-1" />
+// 								<button type="submit" className="inline-flex h-10 items-center justify-center rounded-xl bg-blue-600 px-4 text-white hover:bg-blue-700">
+// 									Kirim
+// 								</button>
+// 							</form>
+// 							<p className="mx-auto mt-2 max-w-2xl px-1 text-center text-xs text-slate-500">Chat ini dapat menghasilkan kesalahan. Verifikasi info penting.</p>
+// 						</div>
+// 					</section>
+// 				</div>
+// 			</main>
+// 		</div>
+// 	);
+// }
+
+// function MessageBubble({ role, content }) {
+// 	const isUser = role === 'user';
+// 	return (
+// 		<div className={`flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`}>
+// 			<div className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${isUser ? 'bg-blue-600 text-white' : 'bg-slate-900 text-white'}`}>{isUser ? 'U' : 'AI'}</div>
+// 			<div className={`max-w-[85%] sm:max-w-[80%] md:max-w-[75%] ${isUser ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'} rounded-2xl px-4 py-2 shadow-sm`}>
+// 				<div className="prose prose-invert max-w-none break-words whitespace-pre-wrap leading-relaxed prose-p:my-2 prose-ul:my-2 prose-ol:my-2">{content}</div>
+// 			</div>
+// 		</div>
+// 	);
+// }
+
+// function Textarea({ value, onChange, placeholder, className }) {
+// 	const ref = useRef(null);
+
+// 	useEffect(() => {
+// 		const el = ref.current;
+// 		if (!el) return;
+// 		el.style.height = '0px';
+// 		el.style.height = Math.min(el.scrollHeight, 180) + 'px';
+// 	}, [value]);
+
+// 	return (
+// 		<textarea
+// 			ref={ref}
+// 			rows={1}
+// 			value={value}
+// 			onChange={onChange}
+// 			placeholder={placeholder}
+// 			className={`max-h-44 min-h-[2.5rem] w-full resize-none rounded-xl border px-3 py-2 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200 ${className ?? ''}`}
+// 		/>
+// 	);
+// }
+
+// export default ChatGPTLikeChat;
+
+
+
+
+
+
+
+
+
+
+
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -97,8 +223,7 @@ export default function ChatPage() {
 	}, [messages, products]);
 
 	useEffect(() => {
-		if (!chatEndRef.current) return;
-		chatEndRef.current.scrollTop = chatEndRef.current.scrollHeight;
+		chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [messages, isLoading]);
 
 	useEffect(() => {
@@ -209,17 +334,17 @@ export default function ChatPage() {
 
 	return (
 		<div className="h-[calc(100vh-4rem)] w-full bg-gradient-to-br from-slate-50 to-slate-100">
-			<div className="container mx-auto h-full w-full px-2 sm:px-4 lg:px-6">
-				<div className="sticky top-0 z-10 mb-2 sm:mb-3 rounded-xl border bg-white/80 backdrop-blur">
-					<div className="flex items-center justify-between gap-3 p-2 sm:p-3">
+			<div className="container mx-auto h-full w-full">
+				<div className="sticky top-0 z-10 mb-3 rounded-xl border bg-white/80 backdrop-blur">
+					<div className="flex items-center justify-between gap-3 ">
+						{/* <div className="text-sm font-semibold text-slate-700">AI Shop Assistant</div> */}
 						{/* MOBILE: buka rekomendasi */}
 						<div className="md:hidden">
 							<Sheet>
 								<SheetTrigger asChild>
-									<Button variant="outline" size="sm" className="gap-2 text-xs sm:text-sm">
-										<ListFilter className="h-3 w-3 sm:h-4 sm:w-4" />
-										<span className="hidden xs:inline">Rekomendasi</span>
-										<span className="xs:hidden">Rec</span>
+									<Button variant="outline" size="sm" className="gap-2">
+										<ListFilter className="h-4 w-4" />
+										Rekomendasi
 									</Button>
 								</SheetTrigger>
 								<SheetContent side="left" className="w-[90vw] sm:w-[420px]">
@@ -239,69 +364,66 @@ export default function ChatPage() {
 				</div>
 
 				{/* 2 kolom: kiri rekomendasi, kanan chat */}
-				<div className="flex flex-col md:grid h-[calc(100%-3.5rem)] sm:h-[calc(100%-4.5rem)] min-h-0 gap-2 sm:gap-4 md:grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] xl:grid-cols-[420px_1fr]">
+				<div className="grid h-[calc(100%-4.5rem)] min-h-0 grid-cols-1 gap-4 md:grid-cols-[1fr_1.6fr]">
 					{/* LEFT: rekomendasi (desktop) */}
-					<aside className="hidden min-h-0 flex-col gap-4 md:flex order-1 md:order-none">
-						<div className="flex flex-col h-full rounded-2xl border bg-white/80 ring-1 ring-slate-200 overflow-hidden">
-							<div className="flex-shrink-0 p-4 border-b border-slate-200">
+					<aside className="hidden min-h-0 flex-col gap-4 md:flex">
+						<div className="rounded-2xl border bg-white/80 p-4 ring-1 ring-slate-200">
+							<div className="mb-3">
 								<h2 className="text-sm font-semibold">Produk Rekomendasi</h2>
 								<p className="text-xs text-slate-500">Dari jawaban AI-mu</p>
 							</div>
-							<div className="flex-1 min-h-0 p-4">
-								<ScrollArea className="h-full pr-2">
-									<RecList items={recommendedProducts} formatIDR={formatIDR} isSelectedForCompare={isSelectedForCompare} toggleCompare={toggleCompare} />
-									<ScrollBar orientation="vertical" />
-								</ScrollArea>
-							</div>
-							<div className="flex-shrink-0 p-4 border-t border-slate-200 bg-slate-50/50">
+							<ScrollArea className="h-[calc(100vh-16rem)] pr-1">
+								<RecList items={recommendedProducts} formatIDR={formatIDR} isSelectedForCompare={isSelectedForCompare} toggleCompare={toggleCompare} />
+								<ScrollBar orientation="vertical" />
+							</ScrollArea>
+							<div className="mt-3">
 								<DebateBar count={comparisonList.length} disabled={comparisonList.length !== 2 || isComparing} isComparing={isComparing} onClick={handleStartComparison} />
 							</div>
 						</div>
 					</aside>
 
 					{/* RIGHT: chat */}
-					<section className="flex min-h-0 flex-col overflow-hidden rounded-xl sm:rounded-2xl border bg-white shadow-sm ring-1 ring-slate-200">
-						{/* Messages viewport - following reference pattern */}
-						<div ref={chatEndRef} className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-6">
-							<div className="mx-auto flex max-w-4xl flex-col gap-3 sm:gap-4">
+					<section className="min-h-0 overflow-hidden rounded-2xl border bg-white ring-1 ring-slate-200">
+						{/* messages */}
+						<ScrollArea className="h-[calc(100%-72px)] px-4 sm:px-6 py-4">
+							<div className="space-y-4">
 								{messages.map((msg, i) => (
-									<MessageBubble key={`${msg.role}-${i}`} role={msg.role} content={msg.content} />
+									<div key={`${msg.role}-${i}`} className={`flex overflow-y-auto  ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+										<div className={`${msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'} max-w-2xl rounded-2xl px-4 py-2 shadow-sm`}>
+											<div className="prose prose-invert ">
+												<ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+											</div>
+										</div>
+									</div>
 								))}
 
 								{isLoading && (
 									<div className="flex justify-start">
-										<div className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-slate-100 px-3 sm:px-4 py-2 sm:py-3 text-slate-600">
-											<Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
-											<span className="text-xs sm:text-sm">AI is thinking...</span>
+										<div className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-slate-600">
+											<Loader2 className="h-4 w-4 animate-spin" /> AI is thinking...
 										</div>
 									</div>
 								)}
 
-								{messages.length === 0 && !isLoading && (
-									<div className="flex h-full items-center justify-center">
-										<EmptyState title="Mulai percakapan" description="Minta rekomendasi, saran budget, atau tempel spesifikasi—AI bantu merangkum." icon={<ArrowRight className="h-4 w-4" />} />
-									</div>
-								)}
-							</div>
-						</div>
+								{messages.length === 0 && !isLoading && <EmptyState title="Mulai percakapan" description="Minta rekomendasi, saran budget, atau tempel spesifikasi—AI bantu merangkum." icon={<ArrowRight className="h-4 w-4" />} />}
 
-						{/* Composer - following reference pattern */}
-						<div className="border-t border-slate-200 p-3 sm:p-4">
-							<form onSubmit={handleSubmit} className="mx-auto flex max-w-4xl items-end gap-2 sm:gap-3">
+								<div ref={chatEndRef} />
+							</div>
+						<ScrollBar orientation="vertical" />
+						</ScrollArea>
+
+						{/* composer */}
+						<div className="border-t border-slate-200 p-3">
+							<form onSubmit={handleSubmit} className="flex gap-2">
 								<input
 									value={input}
 									onChange={(e) => setInput(e.target.value)}
 									placeholder="Ketik pesan Anda..."
-									className="flex-1 min-h-[2.5rem] rounded-lg sm:rounded-xl border border-slate-300 px-3 py-2 sm:py-3 text-sm sm:text-base text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200 placeholder:text-slate-500"
-									disabled={isLoading}
+									className="flex-1 rounded-xl border p-3 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200"
+									disabled={isLoading}	
 								/>
-								<button
-									type="submit"
-									disabled={isLoading}
-									className="inline-flex h-10 sm:h-12 items-center justify-center rounded-lg sm:rounded-xl bg-blue-600 px-4 sm:px-5 text-white transition-colors hover:bg-blue-700 disabled:bg-blue-300"
-								>
-									<Send className="h-4 w-4 sm:mr-2" />
-									<span className="hidden sm:inline text-sm font-medium">Send</span>
+								<button type="submit" disabled={isLoading} className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:bg-blue-300">
+									<Send className="h-4 w-4" />
 								</button>
 							</form>
 						</div>
@@ -311,38 +433,38 @@ export default function ChatPage() {
 
 			{/* MODAL hasil debat + follow-up */}
 			<Dialog open={isModalOpen} onOpenChange={setIsModalOpen} modal={false}>
-				<DialogContent className="flex h-[85vh] max-w-[95vw] sm:max-w-4xl flex-col gap-2 sm:gap-3 p-0 overflow-hidden mx-2 sm:mx-auto">
-					<DialogHeader className="px-3 sm:px-5 pt-3 sm:pt-5">
-						<DialogTitle className="text-sm sm:text-base font-semibold">Debat Produk</DialogTitle>
+				<DialogContent className="flex h-[85vh] max-w-4xl flex-col gap-3 p-0 overflow-hidden">
+					<DialogHeader className="px-5 pt-5">
+						<DialogTitle className="text-base font-semibold">Debat Produk</DialogTitle>
 
 						{comparedPair.length === 2 && (
-							<div className="mt-2 flex flex-wrap items-center gap-1 sm:gap-2 text-xs">
-								<span className="rounded-full bg-blue-50 px-2 sm:px-2.5 py-0.5 sm:py-1 font-medium text-blue-700 ring-1 ring-blue-200 text-xs">A: {comparedPair[0].nama}</span>
-								<span className="rounded-full bg-purple-50 px-2 sm:px-2.5 py-0.5 sm:py-1 font-medium text-purple-700 ring-1 ring-purple-200 text-xs">B: {comparedPair[1].nama}</span>
+							<div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+								<span className="rounded-full bg-blue-50 px-2.5 py-1 font-medium text-blue-700 ring-1 ring-blue-200">A: {comparedPair[0].nama}</span>
+								<span className="rounded-full bg-purple-50 px-2.5 py-1 font-medium text-purple-700 ring-1 ring-purple-200">B: {comparedPair[1].nama}</span>
 							</div>
 						)}
 					</DialogHeader>
 
 					{/* body scrollable */}
 					<div className="min-h-0 flex-1">
-						<ScrollArea className="h-full px-3 sm:px-5 pb-2">
+						<ScrollArea className="h-full px-5 pb-2">
 							{isComparing ? (
 								<div className="grid h-full place-items-center text-slate-600">
-									<div className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-slate-100 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm">
-										<Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" /> AI sedang menganalisis...
+									<div className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2">
+										<Loader2 className="h-4 w-4 animate-spin" /> AI sedang menganalisis...
 									</div>
 								</div>
 							) : (
-								<div className="prose prose-sm sm:prose max-w-none [&>*]:my-1 sm:[&>*]:my-2 [&_p]:leading-relaxed text-sm sm:text-base">
+								<div className="prose max-w-none">
 									<ReactMarkdown remarkPlugins={[remarkGfm]}>{comparisonResult || '_Belum ada ringkasan._'}</ReactMarkdown>
 								</div>
 							)}
 
 							{followupThread.length > 0 && (
-								<div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3 border-t pt-2 sm:pt-3">
+								<div className="mt-4 space-y-3 border-t pt-3">
 									{followupThread.map((m, idx) => (
-										<div key={`${m.role}-${idx}`} className={`${m.role === 'user' ? 'bg-blue-50' : 'bg-slate-50'} rounded-lg sm:rounded-xl p-2 sm:p-3`}>
-											<div className="prose prose-sm sm:prose max-w-none [&>*]:my-1 sm:[&>*]:my-2 [&_p]:leading-relaxed text-sm sm:text-base">
+										<div key={`${m.role}-${idx}`} className={`${m.role === 'user' ? 'bg-blue-50' : 'bg-slate-50'} rounded-xl p-3`}>
+											<div className="prose max-w-none">
 												<ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
 											</div>
 										</div>
@@ -357,20 +479,16 @@ export default function ChatPage() {
 					</div>
 
 					{/* footer sticky */}
-					<DialogFooter className="border-t bg-white/80 px-3 sm:px-5 py-2 sm:py-3 backdrop-blur">
-						<form onSubmit={handleFollowupSubmit} className="flex w-full items-center gap-1.5 sm:gap-2">
+					<DialogFooter className="border-t bg-white/80 px-5 py-3 backdrop-blur">
+						<form onSubmit={handleFollowupSubmit} className="flex w-full items-center gap-2">
 							<input
 								value={followupInput}
 								onChange={(e) => setFollowupInput(e.target.value)}
 								placeholder="Tanya detail lanjutan tentang dua produk ini..."
-								className="flex-1 rounded-lg sm:rounded-xl border p-2 sm:p-3 text-sm sm:text-base text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200"
+								className="flex-1 rounded-xl border p-3 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200"
 							/>
-							<button
-								type="submit"
-								disabled={isFollowupLoading}
-								className="inline-flex items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl bg-blue-600 px-3 sm:px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:bg-blue-300 min-w-[44px] justify-center"
-							>
-								{isFollowupLoading ? <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" /> : <Send className="h-3 w-3 sm:h-4 sm:w-4" />}
+							<button type="submit" disabled={isFollowupLoading} className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:bg-blue-300">
+								{isFollowupLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
 								<span className="sr-only">Kirim</span>
 							</button>
 						</form>
@@ -379,20 +497,6 @@ export default function ChatPage() {
 			</Dialog>
 		</div>
 	);
-
-	// MessageBubble component inside the main component - removed avatars
-	function MessageBubble({ role, content }) {
-		const isUser = role === 'user';
-		return (
-			<div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
-				<div className={`max-w-[85%] sm:max-w-[80%] md:max-w-[75%] ${isUser ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'} rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm`}>
-					<div className="prose prose-invert prose-sm sm:prose max-w-none break-words whitespace-pre-wrap leading-relaxed [&>*]:my-1 sm:[&>*]:my-2 [&_p]:leading-relaxed [&_pre]:text-xs sm:[&_pre]:text-sm [&_pre]:overflow-x-auto [&_code]:text-xs sm:[&_code]:text-sm">
-						<ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-					</div>
-				</div>
-			</div>
-		);
-	}
 }
 
 /* ===== komponen kecil ===== */
@@ -405,36 +509,27 @@ function RecList({ items, formatIDR, isSelectedForCompare, toggleCompare }) {
 	return (
 		<div className="space-y-3">
 			{items.map((product, idx) => (
-				<div key={`${product.id}-${product.nama}-${idx}`} className="group flex flex-col w-full rounded-lg sm:rounded-xl border border-slate-200 p-3 transition-all hover:border-slate-300 hover:shadow-sm">
-					{/* Bagian atas: Gambar dan info produk */}
-					<div className="flex items-center gap-3 mb-3">
-						<Image src={product.gambar} alt={product.nama} width={64} height={64} className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-md sm:rounded-lg object-cover flex-shrink-0" />
-						<div className="min-w-0 flex-1">
-							<p className="font-medium text-sm sm:text-base leading-tight mb-1">{product.nama}</p>
-							<p className="font-semibold text-blue-600 text-sm sm:text-base">{formatIDR(product.harga)}</p>
-						</div>
+				<div key={`${product.id}-${product.nama}-${idx}`} className="group flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 transition-all hover:border-slate-300 hover:shadow-sm">
+					<Image src={product.gambar} alt={product.nama} width={64} height={64} className="h-16 w-16 rounded-lg object-cover" />
+					<div className="min-w-0 flex-1">
+						<p className="truncate font-medium">{product.nama}</p>
+						<p className="font-semibold text-blue-600">{formatIDR(product.harga)}</p>
 					</div>
 
-					{/* Bagian bawah: Tombol aksi */}
-					<div className="flex gap-2 pt-2 border-t border-slate-100">
+					<div className="flex items-center gap-2">
 						<button
 							onClick={() => toggleCompare(product)}
-							className={`flex-1 inline-flex items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+							className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors ${
 								isSelectedForCompare(product) ? 'border-blue-300 bg-blue-50 text-blue-700' : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
 							}`}
 							aria-label={isSelectedForCompare(product) ? 'Hapus dari perbandingan' : 'Tambah ke perbandingan'}
 						>
-							<Scale className="h-4 w-4 flex-shrink-0" />
-							<span>{isSelectedForCompare(product) ? 'Dipilih' : 'Bandingkan'}</span>
+							<Scale className="h-4 w-4" />
+							{isSelectedForCompare(product) ? 'Dipilih' : 'Bandingkan'}
 						</button>
 
-						<Link
-							href={`/products/${product.id}`}
-							className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
-							aria-label={`Detail ${product.nama}`}
-						>
-							<span>Detail</span>
-							<ArrowRight className="h-4 w-4 flex-shrink-0" />
+						<Link href={`/products/${product.id}`} className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm hover:bg-slate-50" aria-label={`Detail ${product.nama}`}>
+							Detail <ArrowRight className="h-4 w-4" />
 						</Link>
 					</div>
 				</div>
@@ -445,18 +540,14 @@ function RecList({ items, formatIDR, isSelectedForCompare, toggleCompare }) {
 
 function DebateBar({ count, disabled, isComparing, onClick }) {
 	return (
-		<Button onClick={onClick} disabled={disabled} className="inline-flex w-full items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl text-xs sm:text-sm py-2 sm:py-2.5">
+		<Button onClick={onClick} disabled={disabled} className="inline-flex w-full items-center justify-center gap-2 rounded-xl">
 			{isComparing ? (
 				<>
-					<Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
-					<span className="hidden sm:inline">AI Sedang Berdebat...</span>
-					<span className="sm:hidden">Berdebat...</span>
+					<Loader2 className="h-4 w-4 animate-spin" /> AI Sedang Berdebat...
 				</>
 			) : (
 				<>
-					<Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
-					<span className="hidden sm:inline">Debatkan {count}/2 Produk</span>
-					<span className="sm:hidden">Debat {count}/2</span>
+					<Sparkles className="h-4 w-4" /> Debatkan {count}/2 Produk
 				</>
 			)}
 		</Button>
@@ -465,10 +556,10 @@ function DebateBar({ count, disabled, isComparing, onClick }) {
 
 function EmptyState({ title, description, icon }) {
 	return (
-		<div className="flex flex-col items-center justify-center rounded-lg sm:rounded-2xl border border-dashed bg-slate-50 px-3 sm:px-4 py-6 sm:py-10 text-center text-slate-600">
-			<div className="mb-2">{icon ?? <Loader2 className="h-4 w-4 sm:h-5 sm:w-5" />}</div>
-			<p className="font-medium text-sm sm:text-base">{title}</p>
-			<p className="mt-1 max-w-sm text-xs sm:text-sm text-slate-500">{description}</p>
+		<div className="flex flex-col items-center justify-center rounded-2xl border border-dashed bg-slate-50 px-4 py-10 text-center text-slate-600">
+			<div className="mb-2">{icon ?? <Loader2 className="h-5 w-5" />}</div>
+			<p className="font-medium">{title}</p>
+			<p className="mt-1 max-w-sm text-sm text-slate-500">{description}</p>
 		</div>
 	);
 }

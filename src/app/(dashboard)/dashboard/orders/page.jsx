@@ -16,7 +16,7 @@ export default async function OrdersPage() {
 		<div className="space-y-6">
 			<div>
 				<h1 className="text-2xl md:text-3xl font-bold tracking-tight">Orders</h1>
-				<p className="mt-1 text-sm text-muted-foreground">Riwayat pesanan kamu yang tersimpan di perangkat ini.</p>
+				<p className="mt-1 text-sm text-muted-foreground">Daftar Riwayat pesanan kamu.</p>
 			</div>
 
 			<Separator />

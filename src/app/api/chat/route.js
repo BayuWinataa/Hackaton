@@ -14,91 +14,88 @@ const escapeRegExp = (s) => String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&
 
 // Normalisasi ringan untuk perbandingan nama (hilangkan spasi dobel, tanda baca umum)
 const normalizeName = (s) =>
-  String(s || '')
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[’'`"]/g, '')        // apostrophe/quotes
-    .replace(/[\(\)\[\]\{\}]/g, ' ') // bracket jadi spasi
-    .replace(/[.,;:/\\|!?~\-–—_+*=<>@#%^&]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+	String(s || '')
+		.toLowerCase()
+		.normalize('NFKD')
+		.replace(/[’'`"]/g, '') // apostrophe/quotes
+		.replace(/[\(\)\[\]\{\}]/g, ' ') // bracket jadi spasi
+		.replace(/[.,;:/\\|!?~\-–—_+*=<>@#%^&]/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
 
 /** Hapus pola ID dari teks model (defense-in-depth) */
 function stripInternalIds(text) {
-  if (!text) return text;
-  let out = text;
+	if (!text) return text;
+	let out = text;
 
-  // [ID:13], (ID: 13), {ID#13}
-  out = out.replace(/\s*[\[\(\{]\s*ID\s*[:#]?\s*\d+\s*[\]\)\}]/gi, '');
-  // ID:13 / ID#13 / ID 13
-  out = out.replace(/(?<=^|[\s,.;\-—–])ID\s*[:#]?\s*\d+\b/gi, '');
-  // Rapikan spasi
-  out = out.replace(/[ \t]{2,}/g, ' ').replace(/\s+(\r?\n)/g, '$1');
+	// [ID:13], (ID: 13), {ID#13}
+	out = out.replace(/\s*[\[\(\{]\s*ID\s*[:#]?\s*\d+\s*[\]\)\}]/gi, '');
+	// ID:13 / ID#13 / ID 13
+	out = out.replace(/(?<=^|[\s,.;\-—–])ID\s*[:#]?\s*\d+\b/gi, '');
+	// Rapikan spasi
+	out = out.replace(/[ \t]{2,}/g, ' ').replace(/\s+(\r?\n)/g, '$1');
 
-  return out;
+	return out;
 }
 
 function injectIdsIfMissing(text, catalog) {
-  if (!text) return text;
+	if (!text) return text;
 
-  const parts = text.split(/```/); // segmen genap = di luar fence
-  for (let i = 0; i < parts.length; i += 2) {
-    let chunk = parts[i];
+	const parts = text.split(/```/); // segmen genap = di luar fence
+	for (let i = 0; i < parts.length; i += 2) {
+		let chunk = parts[i];
 
-    for (const p of catalog) {
-      const escaped = escapeRegExp(p.nama);
-      if (!escaped) continue;
+		for (const p of catalog) {
+			const escaped = escapeRegExp(p.nama);
+			if (!escaped) continue;
 
-      // (^|non-letter/number) [**|__]? (NamaProduk) [**|__]? (?=end|non-letter/number) dan tidak diikuti [ID:...]
-      const nameRe = new RegExp(
-        `(^|[^\\p{L}\\p{N}])(?:\\*\\*|__)?(${escaped})(?:\\*\\*|__)?(?=($|[^\\p{L}\\p{N}]))(?![^\\[]*\\[ID:)`,
-        'giu'
-      );
+			// (^|non-letter/number) [**|__]? (NamaProduk) [**|__]? (?=end|non-letter/number) dan tidak diikuti [ID:...]
+			const nameRe = new RegExp(`(^|[^\\p{L}\\p{N}])(?:\\*\\*|__)?(${escaped})(?:\\*\\*|__)?(?=($|[^\\p{L}\\p{N}]))(?![^\\[]*\\[ID:)`, 'giu');
 
-      // Pertahankan pembatas + core (dengan markdown) lalu sisipkan [ID:x]
-      chunk = chunk.replace(nameRe, (m, left, core) => `${left}${core} [ID:${p.id}]`);
-    }
-    parts[i] = chunk;
-  }
-  return parts.join('```');
+			// Pertahankan pembatas + core (dengan markdown) lalu sisipkan [ID:x]
+			chunk = chunk.replace(nameRe, (m, left, core) => `${left}${core} [ID:${p.id}]`);
+		}
+		parts[i] = chunk;
+	}
+	return parts.join('```');
 }
 
 /** Ekstrak semua ID dari teks (format [ID:123]) */
 const extractIdsFromText = (t) =>
-  Array.from(String(t || '').matchAll(/\[ID:(\d+)\]/g))
-    .map((m) => parseInt(m[1], 10))
-    .filter(Number.isFinite);
+	Array.from(String(t || '').matchAll(/\[ID:(\d+)\]/g))
+		.map((m) => parseInt(m[1], 10))
+		.filter(Number.isFinite);
 
 /**
  * Fallback: cari nama produk yang disebut di teks (longgar),
  * pakai normalisasi ringan & pembatas non-alfanumerik.
  */
 function fallbackExtractIds(text, catalog) {
-  const txt = normalizeName(text);
-  const ids = [];
+	const txt = normalizeName(text);
+	const ids = [];
 
-  for (const p of catalog) {
-    const nameNorm = normalizeName(p.nama);
-    if (!nameNorm) continue;
+	for (const p of catalog) {
+		const nameNorm = normalizeName(p.nama);
+		if (!nameNorm) continue;
 
-    // Pastikan cocok sebagai token (pembatas non-alfanumerik)
-    const re = new RegExp(`(^|[^a-z0-9])${escapeRegExp(nameNorm)}($|[^a-z0-9])`, 'i');
-    if (re.test(txt)) ids.push(p.id);
-  }
-  return ids;
+		// Pastikan cocok sebagai token (pembatas non-alfanumerik)
+		const re = new RegExp(`(^|[^a-z0-9])${escapeRegExp(nameNorm)}($|[^a-z0-9])`, 'i');
+		if (re.test(txt)) ids.push(p.id);
+	}
+	return ids;
 }
 
 /** Dedupe sambil mempertahankan urutan kemunculan */
 function dedupeKeepOrder(arr) {
-  const seen = new Set();
-  const out = [];
-  for (const x of arr) {
-    if (!seen.has(x)) {
-      seen.add(x);
-      out.push(x);
-    }
-  }
-  return out;
+	const seen = new Set();
+	const out = [];
+	for (const x of arr) {
+		if (!seen.has(x)) {
+			seen.add(x);
+			out.push(x);
+		}
+	}
+	return out;
 }
 
 /* =========================
@@ -106,30 +103,30 @@ function dedupeKeepOrder(arr) {
    ========================= */
 
 export async function POST(req) {
-  try {
-    const { messages, context } = await req.json();
+	try {
+		const { messages, context } = await req.json();
 
-    // Sanitize pesan dari client (buang field liar spt meta)
-    const clientMessages = Array.isArray(messages)
-      ? messages
-          .map((m) => ({
-            role: m?.role,
-            content: typeof m?.content === 'string' ? m.content : String(m?.content ?? ''),
-          }))
-          .filter((m) => m.role === 'user' || m.role === 'assistant')
-      : [];
+		// Sanitize pesan dari client (buang field liar spt meta)
+		const clientMessages = Array.isArray(messages)
+			? messages
+					.map((m) => ({
+						role: m?.role,
+						content: typeof m?.content === 'string' ? m.content : String(m?.content ?? ''),
+					}))
+					.filter((m) => m.role === 'user' || m.role === 'assistant')
+			: [];
 
-    // Ringkas katalog yang disuapkan ke model
-    const productInfo = JSON.stringify(
-      products.map((p) => ({
-        id: p.id,
-        nama: p.nama,
-        harga: p.harga,
-        kategori: p.kategori,
-        deskripsi: p.deskripsi,
-        tags: p.tags,
-      }))
-    );
+		// Ringkas katalog yang disuapkan ke model
+		const productInfo = JSON.stringify(
+			products.map((p) => ({
+				id: p.id,
+				nama: p.nama,
+				harga: p.harga,
+				kategori: p.kategori,
+				deskripsi: p.deskripsi,
+				tags: p.tags,
+			}))
+		);
 
 		const systemMessage = {
 			role: 'system',
@@ -175,7 +172,7 @@ ${context ? `KONTEKS TAMBAHAN:\n${context}\n` : ''}
   1) **Pilih 3–5 produk** paling relevan (prioritas: kecocokan kebutuhan → harga → ketersediaan fitur → ulasan internal bila ada).
   2) Sertakan **nama produk** persis, **perkiraan harga (format IDR)**, **fitur kunci**, dan **alasan singkat**.
   3) Jika cocok, tampilkan **tabel banding singkat** (fitur/berat/dimensi/garansi/jenis koneksi, dsb. yang memang ada di JSON).
-  4) Tutup dengan **aksi cepat**: “Tambah ke Keranjang”, “Bandingkan 2 produk ini”, atau “Tanya lagi”.
+  4) Tutup dengan: , “Bandingkan 2 produk ini”, atau “Tanya lagi”.
   5) Jangan tampilkan ID produk di balasan.
 
 - Jika pengguna menyebut target penerima (mis. “untuk ayah”), preferensikan fitur relevan (kenyamanan, kemudahan pakai, ketahanan).
@@ -190,7 +187,6 @@ ${context ? `KONTEKS TAMBAHAN:\n${context}\n` : ''}
   - **Rekomendasi**: daftar berpoin 3–5 item. Tiap item: Nama — harga — 2–3 poin keunggulan.
   - **Banding Singkat** (opsional): tabel fitur jika berguna.
   - **Kenapa Ini Cocok**: 2–4 poin alasan terhubung dengan niat user.
-  - **Aksi Cepat**: saran langkah berikutnya (tambah ke keranjang / bandingkan / set budget).
 - Saat menampilkan harga, gunakan format Rupiah Indonesia (contoh: **Rp 1.500.000**).
 - Jika produk memiliki field \`gambar\`, tautkan namanya ke halaman detail internal (jangan render gambar inline kecuali diminta).
 - Jangan tampilkan ID produk di balasan.	
@@ -226,17 +222,13 @@ ${context ? `KONTEKS TAMBAHAN:\n${context}\n` : ''}
     Keunggulan: …
 
 - **Banding Singkat**  
-  | Produk | Bobot | Koneksi | Garansi | Catatan |
-  |---|---:|---|---|---|
-  | Headphone Peredam Bising Pro | — | — | — | ANC kuat |
 
 - **Kenapa Ini Cocok**
   - Bisa meredam bising kantor/kafe.
   - Nyaman untuk pemakaian >2 jam.
   - Sesuai budget menengah.
 
-- **Aksi Cepat**
-  - Mau bandingkan dengan satu model lain?
+
 
 /* ======================
    INTERAKSI LANJUTAN
@@ -246,39 +238,39 @@ ${context ? `KONTEKS TAMBAHAN:\n${context}\n` : ''}
 Ingat: Semua rekomendasi **harus** berasal dari katalog JSON yang disediakan.`,
 		};
 
-    // Panggil Groq
-    const chatCompletion = await groq.chat.completions.create({
-      messages: [systemMessage, ...clientMessages],
-      model: 'llama-3.3-70b-versatile',
-      temperature: 0.7,
-      max_tokens: 1024,
-    });
+		// Panggil Groq
+		const chatCompletion = await groq.chat.completions.create({
+			messages: [systemMessage, ...clientMessages],
+			model: 'llama-3.3-70b-versatile',
+			temperature: 0.7,
+			max_tokens: 1024,
+		});
 
-    const aiResponse = chatCompletion.choices?.[0]?.message?.content || '';
+		const aiResponse = chatCompletion.choices?.[0]?.message?.content || '';
 
-    // 1) Bersihkan ID yang mungkin ditulis model (defense-in-depth)
-    const cleanedOnce = stripInternalIds(aiResponse);
+		// 1) Bersihkan ID yang mungkin ditulis model (defense-in-depth)
+		const cleanedOnce = stripInternalIds(aiResponse);
 
-    // 2) Injeksi [ID:x] HANYA untuk ekstraksi internal berbasis nama
-    const catalog = products.map((p) => ({ id: p.id, nama: p.nama }));
-    const augmented = injectIdsIfMissing(cleanedOnce, catalog);
+		// 2) Injeksi [ID:x] HANYA untuk ekstraksi internal berbasis nama
+		const catalog = products.map((p) => ({ id: p.id, nama: p.nama }));
+		const augmented = injectIdsIfMissing(cleanedOnce, catalog);
 
-    // 3) Ekstrak semua ID dari augmented (primer)
-    let ids = extractIdsFromText(augmented);
+		// 3) Ekstrak semua ID dari augmented (primer)
+		let ids = extractIdsFromText(augmented);
 
-    // 4) Fallback: union dengan hasil pencarian longgar (agar SEMUA yang disebut ikut)
-    if (true) {
-      const loose = fallbackExtractIds(cleanedOnce, catalog);
-      ids = dedupeKeepOrder([...ids, ...loose]);
-    }
+		// 4) Fallback: union dengan hasil pencarian longgar (agar SEMUA yang disebut ikut)
+		if (true) {
+			const loose = fallbackExtractIds(cleanedOnce, catalog);
+			ids = dedupeKeepOrder([...ids, ...loose]);
+		}
 
-    // 5) Teks balasan ke user TANPA ID
-    const reply = stripInternalIds(augmented);
+		// 5) Teks balasan ke user TANPA ID
+		const reply = stripInternalIds(augmented);
 
-    // 6) Kirim reply + daftar ids
-    return NextResponse.json({ reply, ids });
-  } catch (error) {
-    console.error('Error calling Groq API:', error);
-    return NextResponse.json({ error: `Groq API Error: ${error.message}` }, { status: 500 });
-  }
+		// 6) Kirim reply + daftar ids
+		return NextResponse.json({ reply, ids });
+	} catch (error) {
+		console.error('Error calling Groq API:', error);
+		return NextResponse.json({ error: `Groq API Error: ${error.message}` }, { status: 500 });
+	}
 }

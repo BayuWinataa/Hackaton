@@ -25,7 +25,6 @@ function timeAgo(ts) {
 }
 
 export default function DashboardClient() {
-	// ===== data dashboard dari localStorage =====
 	const [orders, setOrders] = useState([]);
 	const [messagesGlobal, setMessagesGlobal] = useState([]);
 	const [lastChatAt, setLastChatAt] = useState(null);
@@ -128,21 +127,13 @@ export default function DashboardClient() {
 
 	return (
 		<>
-			{/* Toolbar mini */}
-			<div className="flex items-center justify-between gap-2">
-				<div />
-				<Button variant="outline" size="sm" className="gap-2" onClick={() => setIsAskOpen(true)}>
-					<MessageSquare className="h-4 w-4" /> Tanya AI
-				</Button>
-			</div>
-
 			{/* Stats */}
 			<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 				<Card>
 					<CardContent className="p-4">
 						<div className="text-sm text-slate-500">Total Orders</div>
 						<div className="mt-1 text-2xl font-bold">{stats.totalOrders}</div>
-						<div className="text-xs text-slate-500">Tersimpan lokal</div>
+						<div className="text-xs text-slate-500">Tersimpan </div>
 					</CardContent>
 				</Card>
 
@@ -151,26 +142,6 @@ export default function DashboardClient() {
 						<div className="text-sm text-slate-500">Spent</div>
 						<div className="mt-1 text-2xl font-bold">{formatIDR(stats.spent)}</div>
 						<div className="text-xs text-slate-500">Subtotal seluruh order</div>
-					</CardContent>
-				</Card>
-
-				<Card>
-					<CardContent className="p-4">
-						<div className="text-sm text-slate-500">Invoices</div>
-						<div className="mt-1 text-2xl font-bold">{stats.invoices}</div>
-						<div className="text-xs text-slate-500">{stats.unpaid} unpaid</div>
-					</CardContent>
-				</Card>
-
-				<Card>
-					<CardContent className="p-4">
-						<div className="text-sm text-slate-500">Last Chat</div>
-						<div className="mt-1 text-2xl font-bold">{timeAgo(stats.lastChat)}</div>
-						<div className="text-xs text-slate-500">
-							<Link href="/chat" className="underline">
-								See history
-							</Link>
-						</div>
 					</CardContent>
 				</Card>
 			</div>

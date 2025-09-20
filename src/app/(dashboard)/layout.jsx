@@ -38,8 +38,6 @@ export default function DashboardLayout({ children }) {
 							← Kembali ke Home
 						</Link>
 					</div>
-
-					<div className="text-sm text-slate-500">Dashboard</div>
 				</div>
 			</header>
 
@@ -51,7 +49,7 @@ export default function DashboardLayout({ children }) {
 						<SidebarNav />
 						<Separator className="my-4" />
 						<form action="/api/auth/logout" method="POST" className="px-1">
-							<Button type="submit" variant="outline" className="w-full">
+							<Button type="submit" variant="destructive" className="w-full">
 								Logout
 							</Button>
 						</form>

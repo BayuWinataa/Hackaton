@@ -120,7 +120,7 @@ export default function ProductDetail({ params }) {
 									<div className="prose prose-slate max-w-none">
 										<p className="leading-relaxed whitespace-pre-line">{product.longDeskripsi}</p>
 									</div>
-								</CardContent>
+								</CardContent>	
 							</Card>
 						)}
 					</section>
