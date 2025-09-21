@@ -27,8 +27,7 @@ export default function ClientCartPage() {
 	const [phone, setPhone] = useState('');
 	const [address, setAddress] = useState('');
 	const [note, setNote] = useState('');
-	const [payment, setPayment] = useState('qris'); // qris | transfer | cod
-
+	const [payment, setPayment] = useState('qris'); 
 	if (!items.length) {
 		return (
 			<div className="mt-6 text-sm text-muted-foreground">

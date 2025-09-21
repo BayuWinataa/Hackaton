@@ -9,7 +9,6 @@ import { Loader2, MessageSquare, Send } from 'lucide-react';
 import Link from 'next/link';
 import products from '@/../products.json';
 
-// ================= Helpers =================
 const formatIDR = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number.isFinite(Number(n)) ? Number(n) : 0);
 
 const formatDate = (d) => {
@@ -50,31 +49,24 @@ function ItemsTable({ items }) {
 						<th className="py-2 pr-3">Qty</th>
 						<th className="py-2 pr-3">Harga</th>
 						<th className="py-2 pr-3">Subtotal</th>
-						<th className="py-2">Link</th>
 					</tr>
 				</thead>
 				<tbody>
 					{items.map((it, idx) => {
-						const prod = productIndex.get(it.productId);
-						const name = it.name ?? prod?.nama ?? `#${it.productId ?? '—'}`;
+						const productId = it.productId ?? it.id ?? null;
+						const prod = productIndex.get(productId);
+
+						const name = it.name ?? it.nama ?? prod?.nama ?? `#${productId ?? '—'}`;
 						const qty = Number(it.quantity ?? it.qty ?? 1);
-						const price = Number(it.price ?? prod?.harga ?? 0);
+						const price = Number(it.price ?? it.harga ?? prod?.harga ?? 0);
 						const subtotal = Number(it.subtotal ?? price * qty);
+
 						return (
 							<tr key={idx} className="border-t">
 								<td className="py-2 pr-3">{name}</td>
 								<td className="py-2 pr-3">{qty}</td>
 								<td className="py-2 pr-3">{formatIDR(price)}</td>
 								<td className="py-2 pr-3">{formatIDR(subtotal)}</td>
-								<td className="py-2">
-									{prod ? (
-										<Link href={`/products/${prod.id}`} target="_blank" className="text-blue-600 hover:underline">
-											Lihat
-										</Link>
-									) : (
-										<span className="text-slate-400">—</span>
-									)}
-								</td>
 							</tr>
 						);
 					})}
@@ -89,7 +81,7 @@ function Totals({ order }) {
 	const computedSubtotal = useMemo(() => {
 		return items.reduce((acc, it) => {
 			const qty = Number(it.quantity ?? it.qty ?? 1);
-			const price = Number(it.price ?? productIndex.get(it.productId)?.harga ?? 0);
+			const price = Number(it.price ?? it.harga ?? productIndex.get(it.productId ?? it.id)?.harga ?? 0);
 			const sub = Number(it.subtotal ?? price * qty);
 			return acc + (Number.isFinite(sub) ? sub : 0);
 		}, 0);
@@ -155,7 +147,6 @@ export default function OrdersClient() {
 		chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [chatMsgs]);
 
-	// ====== Chat helpers ======
 	const contextString = `Riwayat Order Anda:\n${JSON.stringify(orders, null, 2)}`;
 
 	function extractSuggestionIdsFromReply(text) {
@@ -208,7 +199,6 @@ export default function OrdersClient() {
 		}
 	}
 
-	// ================= Render =================
 	return (
 		<>
 			<div className="flex items-center justify-between gap-2">
@@ -252,26 +242,6 @@ export default function OrdersClient() {
 										{paymentStatus && <div className="mt-1 text-xs text-slate-500">Pembayaran: {String(paymentStatus).toUpperCase()}</div>}
 									</div>
 								</div>
-
-								{/* Ringkasan item singkat */}
-								<div className="space-y-1 text-sm">
-									{items.slice(0, 2).map((it, idx) => {
-										const prod = productIndex.get(it.productId);
-										const name = it.name ?? prod?.nama ?? `#${it.productId ?? '—'}`;
-										const qty = Number(it.quantity ?? it.qty ?? 1);
-										const price = Number(it.price ?? prod?.harga ?? 0);
-										return (
-											<div key={idx} className="flex justify-between">
-												<span className="truncate">
-													{name} × {qty}
-												</span>
-												<span>{formatIDR(price * qty)}</span>
-											</div>
-										);
-									})}
-									{items.length > 2 && <div className="text-xs text-slate-500">+{items.length - 2} item lainnya</div>}
-								</div>
-
 								{/* Total ringkas */}
 								<div className="mt-3 border-t pt-2 text-sm font-semibold flex justify-between">
 									<span>Total</span>
@@ -283,7 +253,6 @@ export default function OrdersClient() {
 				)}
 			</div>
 
-			{/* ===== MODAL DETAIL ORDER (hanya data penting dari JSON yang tersedia) ===== */}
 			{/* ===== MODAL DETAIL ORDER ===== */}
 			<Dialog open={openDetail} onOpenChange={setOpenDetail}>
 				<DialogContent className="flex h-[85vh] max-w-3xl flex-col gap-3 overflow-hidden p-0">
@@ -298,10 +267,22 @@ export default function OrdersClient() {
 									{/* Header */}
 									<div className="rounded-lg border p-3">
 										<div className="flex items-start justify-between">
-											<div>
+											{/* Kiri: info order */}
+											<div className="space-y-1">
 												<div className="text-sm font-semibold">#{selectedOrder.id ?? selectedOrder.orderId ?? '—'}</div>
 												<div className="text-xs text-slate-500">{formatDate(selectedOrder.createdAt ?? selectedOrder.created_at ?? selectedOrder.date)}</div>
+												<div className="flex items-center gap-1 text-xs">
+													<span className="text-slate-500">Pembayaran:</span>
+													<span
+														className={`inline-flex items-center rounded px-2 py-0.5 text-[10px] font-medium
+            ${String(selectedOrder.payment).toLowerCase() === 'cod' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'}`}
+													>
+														{String(selectedOrder.payment).toUpperCase()}
+													</span>
+												</div>
 											</div>
+
+											{/* Kanan: status */}
 											<div className="text-right">
 												{(() => {
 													const s = selectedOrder.status ?? selectedOrder.orderStatus ?? 'unknown';
@@ -316,27 +297,16 @@ export default function OrdersClient() {
 										</div>
 									</div>
 
-									{/* 🆕 Ringkasan Barang & Tanggal */}
+									{/* 🆕 Informasi Customer */}
 									<div className="rounded-lg border p-3">
-										<div className="text-sm font-semibold mb-2">Ringkasan Order</div>
-										<Row label="Tanggal Order" value={formatDate(selectedOrder.createdAt ?? selectedOrder.date)} />
-										<div className="mt-2 space-y-1 text-sm">
-											{(Array.isArray(selectedOrder.items) ? selectedOrder.items : selectedOrder.lines || []).map((it, idx) => {
-												const prod = productIndex.get(it.productId);
-												const name = it.name ?? prod?.nama ?? `#${it.productId ?? '—'}`;
-												const qty = Number(it.quantity ?? it.qty ?? 1);
-												return (
-													<div key={idx} className="flex justify-between">
-														<span>{name}</span>
-														<span className="text-slate-500">× {qty}</span>
-													</div>
-												);
-											})}
+										<div className="text-sm font-semibold mb-3 border-b pb-2">Informasi Customer</div>
+										<div className="grid gap-2 text-sm">
+											<Row label="Nama" value={selectedOrder.customer?.name} />
+											<Row label="Telepon" value={selectedOrder.customer?.phone} />
+											<Row label="Alamat" value={selectedOrder.customer?.address} />
+											<Row label="Catatan" value={selectedOrder.customer?.note} />
 										</div>
 									</div>
-
-									{/* Pembeli & Pengiriman */}
-									{/* ... (bagian lain tetap sama seperti sebelumnya) ... */}
 
 									{/* Item detail (tabel) */}
 									<div className="rounded-lg border p-3">
@@ -349,8 +319,6 @@ export default function OrdersClient() {
 										<div className="text-sm font-semibold mb-2">Ringkasan Pembayaran</div>
 										<Totals order={selectedOrder} />
 									</div>
-
-									{/* ...lanjutan modal tetap sama... */}
 								</div>
 							)}
 							<ScrollBar orientation="vertical" />
@@ -375,6 +343,18 @@ export default function OrdersClient() {
 					<div className="min-h-0 flex-1">
 						<ScrollArea className="h-full px-5 pb-2">
 							<div className="space-y-4">
+								{/* Placeholder kalau chat kosong */}
+								{chatMsgs.length === 0 && !isAsking && (
+									<div className="flex justify-center py-12">
+										<div className="text-center text-slate-400 text-sm">
+											<div className="mb-2 text-2xl">💬</div>
+											<p className="font-medium">Belum ada percakapan</p>
+											<p className="text-slate-500">Tanyakan sesuatu tentang pesanan Anda ✨</p>
+										</div>
+									</div>
+								)}
+
+								{/* Daftar chat */}
 								{chatMsgs.map((m, i) => (
 									<div key={`${m.role}-${i}`} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
 										<div className={`${m.role === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'} max-w-2xl rounded-2xl px-4 py-2 shadow-sm`}>
@@ -383,10 +363,11 @@ export default function OrdersClient() {
 									</div>
 								))}
 
+								{/* Loader ketika AI sedang berpikir */}
 								{isAsking && (
 									<div className="flex justify-start">
 										<div className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-slate-600">
-											<Loader2 className="h-4 w-4 animate-spin" /> AI is thinking...
+											<Loader2 className="h-4 w-4 animate-spin" /> AI sedang memproses...
 										</div>
 									</div>
 								)}
