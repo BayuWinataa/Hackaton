@@ -1,4 +1,3 @@
-// app/(site)/dashboard/page.jsx
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { Separator } from '@/components/ui/separator';
@@ -13,18 +12,13 @@ export default async function DashboardPage() {
 	}
 
 	return (
-		<div className="space-y-6">
-			{/* Header dalam content */}
-			<div>
-				<h1 className="text-2xl md:text-3xl font-bold tracking-tight">Dashboard</h1>
-				<p className="mt-1 text-sm text-muted-foreground">
-					Selamat datang, <span className="font-semibold">{user.name || user.email}</span>.
-				</p>
-			</div>
-
+		<div className="space-y-3">
+			<h1 className="text-2xl md:text-3xl font-bold tracking-tight">Dashboard</h1>
+			<p className="mt-1 text-sm text-muted-foreground">
+				Selamat datang, <span className="font-semibold">{user.name || user.email}</span>.
+			</p>
 			<Separator />
 
-			{/* Semua konten dinamis (orders, chats) dari localStorage dirender di client */}
 			<DashboardClient />
 		</div>
 	);
