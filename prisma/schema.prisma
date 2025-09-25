@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // simpan HASH, bukan plaintext
+  name      String?
+  role      String?  // 'admin'|'user' (opsional)
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id               Int       @id @default(autoincrement())
+  name             String
+  shortDescription String?
+  description      String?
+  price            Int
+  image            String?
+  category         String?
+  tags             Json?      // <- ganti dari String[] ke Json?
+  stock            Int        @default(0)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+

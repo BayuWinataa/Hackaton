@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import gambar from '@/app/assets/kobo.jpg';
+// import gambar from '@/app/assets/kobo.jpg';
+import product from '@/../products.json';
+
 
 const formatIDR = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
 
@@ -12,7 +14,7 @@ export default function ProductCard({ product }) {
 	return (
 		<Card className="group overflow-hidden hover:shadow-xl transition-all">
 			<div className="relative aspect-[4/3] w-full overflow-hidden">
-				<Image src={gambar} alt={product.nama} fill className="object-cover group-hover:scale-[1.03] transition-transform" />
+				<Image src={product.gambar} alt={product.nama} fill className="object-cover group-hover:scale-[1.03] transition-transform" />
 			</div>
 			<CardHeader className="pb-2">
 				<CardTitle className="truncate text-base md:text-lg">{product.nama}</CardTitle>

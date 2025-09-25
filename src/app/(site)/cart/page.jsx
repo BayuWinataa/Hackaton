@@ -1,8 +1,6 @@
 import { Suspense } from 'react';
 import ClientCartPage from '@/components/cart/client-cart';
 
-
-
 export const dynamic = 'force-dynamic';
 
 export const metadata = {

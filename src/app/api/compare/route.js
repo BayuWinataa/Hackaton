@@ -16,7 +16,7 @@ export async function POST(req) {
         
         ATURAN FORMAT BALASAN (SANGAT PENTING):
         1.  Gunakan format Markdown yang rapi (headings, bold, bullet points).
-        2.  Mulai dengan judul perbandingan, contoh: "**Debat Sengit: [Nama Produk A] vs. [Nama Produk B]**".
+        2.  Mulai dengan judul perbandingan, contoh: ": [Nama Produk A] vs [Nama Produk B]**".
         3.  Buat bagian "Keunggulan Utama" untuk masing-masing produk.
         4.  Buat bagian "Potensi Kelemahan" untuk masing-masing produk.
         5.  Akhiri dengan bagian "Kesimpulan & Rekomendasi" yang secara jelas merekomendasikan satu produk untuk persona pengguna yang diberikan, beserta alasannya.
