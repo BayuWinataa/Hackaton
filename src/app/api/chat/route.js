@@ -124,6 +124,7 @@ export async function POST(req) {
 				harga: p.harga,
 				kategori: p.kategori,
 				deskripsi: p.deskripsi,
+				longDeskripsi: p.deskripsi,
 				tags: p.tags,
 			}))
 		);
@@ -185,7 +186,7 @@ ${context ? `KONTEKS TAMBAHAN:\n${context}\n` : ''}
   - **Ringkas**: 1–2 kalimat inti (apa yang terbaik untuk kasus user).
   - Jangan tampilkan ID produk di balasan .
   - **Rekomendasi**: daftar berpoin 3–5 item. Tiap item: Nama — harga — 2–3 poin keunggulan.
-  - **Banding Singkat** (opsional): tabel fitur jika berguna.
+  - **Banding Singkat** (opsional)
   - **Kenapa Ini Cocok**: 2–4 poin alasan terhubung dengan niat user.
 - Saat menampilkan harga, gunakan format Rupiah Indonesia (contoh: **Rp 1.500.000**).
 - Jika produk memiliki field \`gambar\`, tautkan namanya ke halaman detail internal (jangan render gambar inline kecuali diminta).
@@ -220,7 +221,6 @@ ${context ? `KONTEKS TAMBAHAN:\n${context}\n` : ''}
 
   • **Nama Produk 3** — **Rp X**  
     Keunggulan: …
-
 - **Banding Singkat**  
 
 - **Kenapa Ini Cocok**

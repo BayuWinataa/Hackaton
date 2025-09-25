@@ -298,5 +298,95 @@
 		"deskripsi": "Set alat musik ukulele lengkap dengan ukulele ukuran standar, tuner, strap, dan buku panduan belajar. Cocok untuk pemula yang ingin belajar bermain ukulele.",
 		"longDeskripsi": "Set Alat Musik Ukulele Beginner adalah paket lengkap yang dirancang khusus untuk pemula yang ingin memulai perjalanan mereka dalam dunia musik. Set ini mencakup ukulele ukuran standar yang terbuat dari kayu berkualitas tinggi, memberikan suara yang jernih dan resonan. Dilengkapi dengan tuner digital yang memudahkan Anda untuk menyetel ukulele dengan tepat, serta strap yang nyaman untuk digunakan saat bermain. Buku panduan belajar yang disertakan memberikan instruksi langkah demi langkah, mulai dari dasar-dasar bermain ukulele hingga teknik-teknik lanjutan, sehingga Anda dapat belajar dengan mudah dan cepat. Dengan desain yang menarik dan ukuran yang pas untuk tangan, ukulele ini sangat cocok untuk semua usia. Set Alat Musik Ukulele Beginner adalah pilihan ideal bagi siapa saja yang ingin mengeksplorasi bakat musik mereka dan menikmati kesenangan bermain alat musik.",
 		"tags": ["ukulele", "musik", "alat musik", "hobi", "belajar", "pemula"]
+	},
+	{
+		"id": 31,
+		"nama": "Smartphone Galaxy Zeta 5G",
+		"harga": 7500000,
+		"gambar": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=60",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Smartphone flagship dengan layar AMOLED 6.7 inci, kamera 108MP, dan dukungan 5G. Performa cepat untuk multitasking dan gaming.",
+		"longDeskripsi": "Galaxy Zeta 5G hadir dengan layar AMOLED 6.7 inci resolusi tinggi yang menampilkan warna tajam dan detail jernih. Ditenagai prosesor octa-core terbaru dengan RAM 8GB dan penyimpanan internal 256GB, smartphone ini menawarkan performa mulus untuk berbagai aktivitas, mulai dari multitasking, fotografi, hingga gaming berat. Kamera utama 108MP dengan teknologi AI menghasilkan foto berkualitas profesional di segala kondisi cahaya. Baterai 5000mAh mendukung pengisian cepat 65W, memastikan perangkat siap dipakai sepanjang hari. Dengan desain tipis dan dukungan jaringan 5G, Galaxy Zeta 5G adalah pilihan ideal bagi pengguna yang mengutamakan kecepatan, gaya, dan kinerja.",
+		"tags": ["smartphone", "handphone", "android", "5G", "kamera", "gaming"]
+	},
+	{
+		"id": 32,
+		"nama": "iPhone Nova X",
+		"harga": 13500000,
+		"gambar": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&auto=format&fit=crop&q=60",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "iPhone terbaru dengan chip A17 Bionic, layar Super Retina XDR 6.1 inci, dan sistem kamera ganda 48MP. Desain premium dengan iOS terkini.",
+		"longDeskripsi": "iPhone Nova X menghadirkan pengalaman mobile premium dengan chip A17 Bionic yang sangat cepat dan efisien. Layar Super Retina XDR 6.1 inci memberikan visual yang memukau dengan kecerahan tinggi dan akurasi warna luar biasa. Dilengkapi sistem kamera ganda 48MP yang mendukung mode malam, HDR, dan perekaman video 4K sinematik. Kapasitas baterai 4200mAh mendukung penggunaan seharian dengan pengisian cepat dan pengisian nirkabel MagSafe. iOS terbaru menghadirkan fitur keamanan canggih, integrasi ekosistem Apple, dan pembaruan jangka panjang. Dengan desain elegan dari aluminium dan kaca, iPhone Nova X menjadi pilihan tepat untuk pengguna yang mencari performa, ekosistem kuat, dan gaya hidup premium.",
+		"tags": ["iphone", "smartphone", "handphone", "apple", "iOS", "kamera"]
+	},
+	{
+		"id": 33,
+		"nama": "Samsung Galaxy A54 5G",
+		"harga": 5499000,
+		"gambar": "https://images.unsplash.com/photo-1693943710014-4f177c246ddb?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Smartphone mid-range dengan layar Super AMOLED 6.4 inci, kamera utama 50MP, dan baterai 5000mAh.",
+		"longDeskripsi": "Samsung Galaxy A54 5G hadir dengan layar Super AMOLED 6.4 inci dengan refresh rate 120Hz, menghasilkan visual yang mulus. Ditenagai Exynos 1380 dengan RAM 8GB dan penyimpanan hingga 256GB, performanya stabil untuk multitasking. Kamera utama 50MP OIS mendukung hasil foto jernih dan stabil. Baterai 5000mAh dengan fast charging 25W membuatnya ideal untuk penggunaan sehari-hari. Dengan dukungan 5G, Galaxy A54 cocok untuk anak muda yang ingin gaya sekaligus performa.",
+		"tags": ["samsung", "android", "handphone", "galaxy", "5G"]
+	},
+	{
+		"id": 34,
+		"nama": "Oppo Reno10 Pro 5G",
+		"harga": 7999000,
+		"gambar": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=60",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Oppo Reno10 Pro 5G dengan kamera potret 64MP, layar AMOLED 120Hz, dan pengisian cepat 80W.",
+		"longDeskripsi": "Oppo Reno10 Pro 5G menghadirkan keunggulan di sektor kamera dengan sensor potret 64MP. Layar AMOLED 6.7 inci mendukung refresh rate 120Hz untuk pengalaman visual halus. Prosesor Snapdragon 778G dengan RAM 12GB memastikan performa lancar. Fitur fast charging 80W mampu mengisi penuh baterai 4600mAh hanya dalam waktu singkat. Desain tipis dan elegan menjadikan Reno10 Pro pilihan tepat untuk pengguna yang mementingkan fotografi dan gaya.",
+		"tags": ["oppo", "android", "handphone", "reno", "kamera"]
+	},
+	{
+		"id": 35,
+		"nama": "Vivo V29e",
+		"harga": 4399000,
+		"gambar": "https://images.unsplash.com/photo-1671445791136-049a3f151e3c?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Vivo V29e dengan kamera selfie 50MP, layar AMOLED 120Hz, dan desain tipis premium.",
+		"longDeskripsi": "Vivo V29e dirancang untuk pecinta selfie dengan kamera depan 50MP autofocus. Layar AMOLED 6.67 inci dengan refresh rate 120Hz menghadirkan pengalaman visual mulus. Ditenagai Snapdragon 695 5G dan RAM 8GB, performanya cukup untuk multitasking dan gaming ringan. Baterai 4800mAh mendukung fast charging 66W. Desain tipis premium membuatnya nyaman digenggam sekaligus stylish.",
+		"tags": ["vivo", "android", "handphone", "selfie", "kamera"]
+	},
+	{
+		"id": 36,
+		"nama": "Xiaomi Redmi Note 12 Pro",
+		"harga": 4499000,
+		"gambar": "https://images.unsplash.com/photo-1706669923923-e8ff18cd3310?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Xiaomi Redmi Note 12 Pro dengan kamera 108MP, layar AMOLED 120Hz, dan pengisian cepat 67W.",
+		"longDeskripsi": "Redmi Note 12 Pro menawarkan value tinggi dengan kamera utama 108MP, layar AMOLED 6.67 inci 120Hz, dan prosesor MediaTek Dimensity 1080. RAM 8GB dan penyimpanan 256GB cukup luas untuk kebutuhan harian. Baterai 5000mAh mendukung fast charging 67W, ideal untuk pengguna yang ingin performa dan daya tahan dalam harga terjangkau.",
+		"tags": ["xiaomi", "redmi", "android", "handphone", "kamera"]
+	},
+	{
+		"id": 37,
+		"nama": "Realme 11 Pro+ 5G",
+		"harga": 6299000,
+		"gambar": "https://images.unsplash.com/photo-1695499405433-63b7d42e7326?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Realme 11 Pro+ 5G dengan kamera utama 200MP, layar AMOLED curved, dan fast charging 100W.",
+		"longDeskripsi": "Realme 11 Pro+ 5G hadir dengan kamera 200MP OIS yang menghasilkan detail luar biasa. Layar AMOLED curved 6.7 inci dengan refresh rate 120Hz memberikan kesan premium. Prosesor Dimensity 7050 dengan RAM 12GB memastikan performa handal. Baterai 5000mAh mendukung fast charging 100W, memungkinkan pengisian penuh kurang dari 30 menit. Cocok untuk pengguna muda yang ingin flagship terjangkau.",
+		"tags": ["realme", "android", "handphone", "kamera", "5G"]
+	},
+	{
+		"id": 38,
+		"nama": "Infinix Zero Ultra",
+		"harga": 6499000,
+		"gambar": "https://images.unsplash.com/photo-1722888595092-71fbb8b25232?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Infinix Zero Ultra dengan kamera 200MP, layar AMOLED 120Hz, dan fast charging 180W.",
+		"longDeskripsi": "Infinix Zero Ultra menghadirkan teknologi pengisian tercepat 180W di kelasnya. Kamera 200MP memberikan hasil foto detail tinggi. Layar AMOLED 6.8 inci 120Hz mendukung pengalaman visual mulus. Ditenagai Dimensity 920 dengan RAM 8GB, performa cukup untuk kebutuhan harian. Baterai 4500mAh tetap tahan lama berkat optimisasi perangkat lunak.",
+		"tags": ["infinix", "android", "handphone", "kamera", "fast charging"]
+	},
+	{
+		"id": 39,
+		"nama": "Asus ROG Phone 7",
+		"harga": 12999000,
+		"gambar": "https://images.unsplash.com/photo-1590653956132-7124afce5a9d?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"kategori": "elektronik & gadget",
+		"deskripsi": "Smartphone gaming dengan Snapdragon 8 Gen 2, layar AMOLED 165Hz, dan baterai 6000mAh.",
+		"longDeskripsi": "Asus ROG Phone 7 dirancang khusus untuk gamer dengan layar AMOLED 6.78 inci refresh rate 165Hz, chipset Snapdragon 8 Gen 2, dan RAM 12GB. Baterai 6000mAh mendukung fast charging 65W, memastikan sesi gaming panjang tanpa gangguan. Fitur AirTrigger, pendingin eksternal, dan audio ganda memberikan pengalaman gaming mobile terbaik.",
+		"tags": ["asus", "rog", "android", "handphone", "gaming"]
 	}
 ]

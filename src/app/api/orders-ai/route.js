@@ -1,16 +1,21 @@
 // app/api/orders-ai/route.js
 import { NextResponse } from 'next/server';
 import { Groq } from 'groq-sdk';
-import products from '@/../products.json'; // ← katalog resmi
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req) {
 	try {
-		const { messages = [], context = '' } = await req.json();
+		const { messages = [], context = '', orders = [] } = await req.json();
 
-		// Siapkan katalog yang diperbolehkan (id + nama saja untuk ringkas)
-		const allowedCatalog = products.map((p) => ({ id: p.id, nama: p.nama }));
+		// Ambil data orders (langsung dari client, bukan dari file json)
+		// Buat katalog produk yang diperbolehkan dari items di setiap order
+		const allowedCatalog = orders
+			.flatMap((o) => o.items || [])
+			.map((item) => ({
+				id: item.id ?? item.productId,
+				nama: item.nama ?? item.name,
+			}));
 
 		const system = `
 Anda adalah asisten AI untuk pertanyaan terkait pesanan/order pengguna.
@@ -26,7 +31,7 @@ ATURAN SANGAT PENTING (WAJIB DIIKUTI):
 - Jawab hanya berdasarkan informasi yang diberikan, jangan menebak.
     `.trim();
 
-		const model = 'llama-3.1-8b-instant';
+		const model = 'meta-llama/llama-4-maverick-17b-128e-instruct';
 
 		const chain = [
 			{ role: 'system', content: system },
