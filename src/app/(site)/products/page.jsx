@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDeferredValue, useMemo, useState } from 'react';
-import products from '@/../products.json';
-import fallbackImg from '@/app/assets/kobo.jpg';
+import { useDeferredValue, useMemo, useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import { MessageSquare, Sparkles, Filter as FilterIcon, SlidersHorizontal } from 'lucide-react';
+
 
 // shadcn/ui
 import { Button } from '@/components/ui/button';
@@ -15,30 +15,70 @@ import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
+// Initialize Supabase client - replace with your actual credentials
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
+
+// Fallback image for products without images
+const fallbackImg = '/images/product-placeholder.jpg';
+
 export default function Products() {
 	// state
 	const [query, setQuery] = useState('');
 	const [category, setCategory] = useState('semua');
 	const [sortBy, setSortBy] = useState('terkini');
+	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
 	// bikin search smooth
 	const qDeferred = useDeferredValue(query);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			try {
+				setLoading(true);
+				setError(null);
+
+				const { data, error } = await supabase.from('Products').select('*').order('created_at', { ascending: false }); // Order by newest first
+
+				if (error) {
+					console.error('Error fetching products:', error);
+					setError('Gagal memuat produk. Silakan coba lagi.');
+					setProducts([]);
+				} else {
+					setProducts(data || []);
+				}
+			} catch (err) {
+				console.error('Network error:', err);
+				setError('Terjadi kesalahan jaringan. Periksa koneksi internet Anda.');
+				setProducts([]);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchProducts();
+	}, []);
 
 	// derive categories + quick filters
 	const categories = useMemo(() => {
 		const set = new Set((products || []).map((p) => p.kategori).filter(Boolean));
 		return ['semua', ...Array.from(set)];
-	}, []);
+	}, [products]);
 
 	// quick tags dari seluruh produk (maks 10 unik)
 	const topTags = useMemo(() => {
 		const bag = new Map();
-		(products || []).forEach((p) => (p.tags || []).forEach((t) => bag.set(t, (bag.get(t) || 0) + 1)));
+		(products || []).forEach((p) => {
+			// Handle both array and JSON string formats for tags
+			const tags = Array.isArray(p.tags) ? p.tags : typeof p.tags === 'string' ? JSON.parse(p.tags || '[]') : [];
+			tags.forEach((t) => bag.set(t, (bag.get(t) || 0) + 1));
+		});
 		return [...bag.entries()]
 			.sort((a, b) => b[1] - a[1])
 			.slice(0, 10)
 			.map(([t]) => t);
-	}, []);
+	}, [products]);
 
 	const filtered = useMemo(() => {
 		const list = (products || []).filter((p) => {
@@ -55,11 +95,42 @@ export default function Products() {
 		if (sortBy === 'termahal') arr.sort((a, b) => (b.harga || 0) - (a.harga || 0));
 		if (sortBy === 'az') arr.sort((a, b) => String(a.nama).localeCompare(String(b.nama)));
 		if (sortBy === 'za') arr.sort((a, b) => String(b.nama).localeCompare(String(a.nama)));
-		// "terkini" default: as-is (anggap urutan di JSON sudah cukup)
+		// "terkini" default: as-is (sudah diurutkan dari database)
 		return arr;
-	}, [qDeferred, category, sortBy]);
+	}, [qDeferred, category, sortBy, products]);
 
-	const formatIDR = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number.isFinite(n) ? n : 0);
+	const formatIDR = (n) =>
+		new Intl.NumberFormat('id-ID', {
+			style: 'currency',
+			currency: 'IDR',
+			maximumFractionDigits: 0,
+		}).format(Number.isFinite(n) ? n : 0);
+
+	if (loading) {
+		return (
+			<div className="min-h-screen flex items-center justify-center">
+				<div className="text-center">
+					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+					<p className="text-gray-600">Memuat produk...</p>
+				</div>
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className="min-h-screen flex items-center justify-center">
+				<div className="text-center max-w-md">
+					<div className="rounded-full bg-red-50 p-3 mx-auto mb-4 w-fit">
+						<Sparkles className="h-6 w-6 text-red-600" />
+					</div>
+					<h3 className="text-lg font-semibold text-gray-900 mb-2">Oops! Terjadi Kesalahan</h3>
+					<p className="text-gray-600 mb-4">{error}</p>
+					<Button onClick={() => window.location.reload()}>Coba Lagi</Button>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white">
@@ -218,8 +289,7 @@ export default function Products() {
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 						{filtered.map((product, idx) => {
 							const img = product.gambar || product.image || fallbackImg;
-							const showTags = (product.tags || []).slice(0, 2);
-							
+							const showTags = Array.isArray(product.tags) ? product.tags.slice(0, 2) : typeof product.tags === 'string' ? JSON.parse(product.tags || '[]').slice(0, 2) : [];
 
 							return (
 								<Link
