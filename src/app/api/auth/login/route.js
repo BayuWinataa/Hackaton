@@ -1,15 +1,26 @@
-import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
-import bcrypt from 'bcrypt';
-import { signSession, setSessionCookie } from '@/lib/auth';
+// Temporary bypass for Prisma in production
+// Since we're using Supabase now, we can disable Prisma routes in production
 
-const schema = z.object({
-	email: z.string().email(),
-	password: z.string().min(6),
-});
+import { NextResponse } from 'next/server';
 
 export async function POST(req) {
+	if (process.env.NODE_ENV === 'production') {
+		return NextResponse.json({ 
+			error: 'This endpoint is disabled in production. Please use Supabase authentication.' 
+		}, { status: 503 });
+	}
+
+	// Import Prisma only in development
+	const { prisma } = await import('@/lib/prisma');
+	const { z } = await import('zod');
+	const bcrypt = await import('bcrypt');
+	const { signSession, setSessionCookie } = await import('@/lib/auth');
+
+	const schema = z.object({
+		email: z.string().email(),
+		password: z.string().min(6),
+	});
+
 	try {
 		const body = await req.json();
 		const { email, password } = schema.parse(body);

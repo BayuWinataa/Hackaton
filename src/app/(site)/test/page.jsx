@@ -113,20 +113,9 @@
 
 // export default ChatGPTLikeChat;
 
-
-
-
-
-
-
-
-
-
-
-
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -143,7 +132,7 @@ import { Scale, Sparkles, Send, Loader2, ArrowRight, ListFilter } from 'lucide-r
 import gambar from '@/app/assets/kobo.jpg';
 import products from '@/../products.json';
 
-export default function ChatPage() {
+function ChatPageContent() {
 	const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
@@ -409,7 +398,7 @@ export default function ChatPage() {
 
 								<div ref={chatEndRef} />
 							</div>
-						<ScrollBar orientation="vertical" />
+							<ScrollBar orientation="vertical" />
 						</ScrollArea>
 
 						{/* composer */}
@@ -420,7 +409,7 @@ export default function ChatPage() {
 									onChange={(e) => setInput(e.target.value)}
 									placeholder="Ketik pesan Anda..."
 									className="flex-1 rounded-xl border p-3 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-200"
-									disabled={isLoading}	
+									disabled={isLoading}
 								/>
 								<button type="submit" disabled={isLoading} className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:bg-blue-300">
 									<Send className="h-4 w-4" />
@@ -561,5 +550,28 @@ function EmptyState({ title, description, icon }) {
 			<p className="font-medium">{title}</p>
 			<p className="mt-1 max-w-sm text-sm text-slate-500">{description}</p>
 		</div>
+	);
+}
+
+// Loading component for Suspense boundary
+function ChatPageLoading() {
+	return (
+		<div className="h-[calc(100vh-4rem)] w-full bg-gradient-to-br from-slate-50 to-slate-100">
+			<div className="container mx-auto h-full w-full flex items-center justify-center">
+				<div className="text-center">
+					<Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+					<p className="text-slate-600">Loading chat...</p>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+// Main export with Suspense boundary
+export default function ChatPage() {
+	return (
+		<Suspense fallback={<ChatPageLoading />}>
+			<ChatPageContent />
+		</Suspense>
 	);
 }

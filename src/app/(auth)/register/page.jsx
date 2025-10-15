@@ -1,7 +1,7 @@
 // src/app/register/page.jsx
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-export default function RegisterPage() {
+function RegisterPageContent() {
 	const router = useRouter();
 	const search = useSearchParams();
 	const next = search.get('next') || '/dashboard';
@@ -83,5 +83,32 @@ export default function RegisterPage() {
 				</CardContent>
 			</Card>
 		</div>
+	);
+}
+
+// Loading component for Suspense boundary
+function RegisterPageLoading() {
+	return (
+		<div className="flex min-h-screen w-full items-center justify-center bg-muted/30 px-4">
+			<Card className="w-full max-w-md shadow-lg">
+				<CardHeader>
+					<CardTitle className="text-center text-2xl font-bold">Loading...</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<div className="flex justify-center">
+						<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+					</div>
+				</CardContent>
+			</Card>
+		</div>
+	);
+}
+
+// Main export with Suspense boundary
+export default function RegisterPage() {
+	return (
+		<Suspense fallback={<RegisterPageLoading />}>
+			<RegisterPageContent />
+		</Suspense>
 	);
 }

@@ -1,7 +1,7 @@
 // src/app/(auth)/login/page.jsx
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +12,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
 import { Loader2, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 
-export default function LoginPage() {
+function LoginPageContent() {
 	const router = useRouter();
 	const search = useSearchParams();
 	const next = search.get('next') || '/dashboard';
@@ -130,5 +130,34 @@ export default function LoginPage() {
 				</Card>
 			</div>
 		</div>
+	);
+}
+
+// Loading component for Suspense boundary
+function LoginPageLoading() {
+	return (
+		<div className="w-full flex items-center justify-center">
+			<div className="w-full max-w-md">
+				<Card className="border-border/60 shadow-lg">
+					<CardHeader className="space-y-1">
+						<CardTitle className="text-center text-2xl font-semibold tracking-tight">Loading...</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<div className="flex justify-center">
+							<Loader2 className="h-8 w-8 animate-spin" />
+						</div>
+					</CardContent>
+				</Card>
+			</div>
+		</div>
+	);
+}
+
+// Main export with Suspense boundary
+export default function LoginPage() {
+	return (
+		<Suspense fallback={<LoginPageLoading />}>
+			<LoginPageContent />
+		</Suspense>
 	);
 }

@@ -1,9 +1,17 @@
 // src/app/api/auth/register/route.js
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcrypt';
 
 export async function POST(req) {
+	if (process.env.NODE_ENV === 'production') {
+		return NextResponse.json({ 
+			error: 'This endpoint is disabled in production. Please use Supabase authentication.' 
+		}, { status: 503 });
+	}
+
+	// Import Prisma only in development
+	const { prisma } = await import('@/lib/prisma');
+	const bcrypt = await import('bcrypt');
+
 	try {
 		const { email, password, name } = await req.json();
 		if (!email || !password) {

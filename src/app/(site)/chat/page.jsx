@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -17,7 +17,7 @@ import { Scale, Sparkles, Send, Loader2, ArrowRight, ListFilter } from 'lucide-r
 import gambar from '@/app/assets/kobo.jpg';
 import products from '@/../products.json';
 
-export default function ChatPage() {
+function ChatPageContent() {
 	const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
@@ -470,5 +470,28 @@ function EmptyState({ title, description, icon }) {
 			<p className="font-medium text-sm sm:text-base">{title}</p>
 			<p className="mt-1 max-w-sm text-xs sm:text-sm text-slate-500">{description}</p>
 		</div>
+	);
+}
+
+// Loading component for Suspense boundary
+function ChatPageLoading() {
+	return (
+		<div className="h-[calc(100vh-4rem)] w-full bg-gradient-to-br from-slate-50 to-slate-100">
+			<div className="container mx-auto h-full w-full flex items-center justify-center">
+				<div className="text-center">
+					<Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+					<p className="text-slate-600">Loading chat...</p>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+// Main export with Suspense boundary
+export default function ChatPage() {
+	return (
+		<Suspense fallback={<ChatPageLoading />}>
+			<ChatPageContent />
+		</Suspense>
 	);
 }
